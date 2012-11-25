@@ -31,11 +31,23 @@ namespace MediaPortal.UI.SkinEngine.Controls.Transforms
 {
   public class RotateTransform : Transform
   {
+    /// <summary>
+    /// Defines the possible axes to be rotated around.
+    /// </summary>
+    public enum RotationAxis
+    {
+      X,
+      Y,
+      Z
+    }
+
     #region Protected fields
 
     protected AbstractProperty _centerXProperty;
     protected AbstractProperty _centerYProperty;
+    protected AbstractProperty _centerZProperty;
     protected AbstractProperty _angleProperty;
+    protected AbstractProperty _axisProperty;
 
     #endregion
 
@@ -57,21 +69,27 @@ namespace MediaPortal.UI.SkinEngine.Controls.Transforms
     {
       _centerYProperty = new SProperty(typeof(double), 0.0);
       _centerXProperty = new SProperty(typeof(double), 0.0);
+      _centerZProperty = new SProperty(typeof(double), 0.0);
       _angleProperty = new SProperty(typeof(double), 0.0);
+      _axisProperty = new SProperty(typeof(RotationAxis), RotationAxis.Z);
     }
 
     void Attach()
     {
-      _centerYProperty.Attach(OnPropertyChanged);
       _centerXProperty.Attach(OnPropertyChanged);
+      _centerYProperty.Attach(OnPropertyChanged);
+      _centerZProperty.Attach(OnPropertyChanged);
       _angleProperty.Attach(OnPropertyChanged);
+      _axisProperty.Attach(OnPropertyChanged);
     }
 
     void Detach()
     {
-      _centerYProperty.Detach(OnPropertyChanged);
       _centerXProperty.Detach(OnPropertyChanged);
+      _centerYProperty.Detach(OnPropertyChanged);
+      _centerZProperty.Detach(OnPropertyChanged);
       _angleProperty.Detach(OnPropertyChanged);
+      _axisProperty.Detach(OnPropertyChanged);
     }
 
     public override void DeepCopy(IDeepCopyable source, ICopyManager copyManager)
@@ -81,7 +99,9 @@ namespace MediaPortal.UI.SkinEngine.Controls.Transforms
       RotateTransform t = (RotateTransform) source;
       CenterX = t.CenterX;
       CenterY = t.CenterY;
+      CenterZ = t.CenterZ;
       Angle = t.Angle;
+      Axis = t.Axis;
       Attach();
     }
 
@@ -111,6 +131,17 @@ namespace MediaPortal.UI.SkinEngine.Controls.Transforms
       set { _centerYProperty.SetValue(value); }
     }
 
+    public AbstractProperty CenterZProperty
+    {
+      get { return _centerZProperty; }
+    }
+
+    public double CenterZ
+    {
+      get { return (double) _centerZProperty.GetValue(); }
+      set { _centerZProperty.SetValue(value); }
+    }
+
     public AbstractProperty AngleProperty
     {
       get { return _angleProperty; }
@@ -122,20 +153,38 @@ namespace MediaPortal.UI.SkinEngine.Controls.Transforms
       set { _angleProperty.SetValue(value); }
     }
 
+    public AbstractProperty AxisProperty
+    {
+      get { return _axisProperty; }
+    }
+
+    public RotationAxis Axis
+    {
+      get { return (RotationAxis) _axisProperty.GetValue(); }
+      set { _axisProperty.SetValue(value); }
+    }
+
     #endregion
 
     public override void UpdateTransform()
     {
       base.UpdateTransform();
+      RotationAxis axis = Axis;
       double radians = Angle / 180.0 * Math.PI;
 
-      if (CenterX == 0.0 && CenterY == 0.0)
-        _matrix = Matrix.RotationZ((float) radians);
+      if (CenterX == 0.0 && CenterY == 0.0 && CenterZ == 0.0)
+      {
+        if (axis == RotationAxis.X) _matrix = Matrix.RotationX((float) radians);
+        if (axis == RotationAxis.Y) _matrix = Matrix.RotationY((float) radians);
+        if (axis == RotationAxis.Z) _matrix = Matrix.RotationZ((float) radians);
+      }
       else
       {
-        _matrix = Matrix.Translation((float) -CenterX, (float) -CenterY, 0);
-        _matrix *= Matrix.RotationZ((float) radians);
-        _matrix *= Matrix.Translation((float) CenterX, (float) CenterY, 0);
+        _matrix = Matrix.Translation((float) -CenterX, (float) -CenterY, (float) -CenterZ);
+        if (axis == RotationAxis.X) _matrix *= Matrix.RotationX((float) radians);
+        if (axis == RotationAxis.Y) _matrix *= Matrix.RotationY((float) radians);
+        if (axis == RotationAxis.Z) _matrix *= Matrix.RotationZ((float) radians);
+        _matrix *= Matrix.Translation((float) CenterX, (float) CenterY, (float) CenterZ);
       }
     }
   }
