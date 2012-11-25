@@ -448,18 +448,43 @@ namespace MediaPortal.UI.SkinEngine.DirectX
     /// <param name="height">The height of the desired screen-space.</param>
     public static void SetCameraProjection(int width, int height)
     {
+      SetCameraProjection(width, height, new Point(0, 0));
+    }
+
+    /// <summary>
+    /// Creates and the camera and projection matrices use in future rendering. FinalTransform is 
+    /// updated to reflect this change.
+    /// </summary>
+    /// <param name="width">The width of the desired screen-space.</param>
+    /// <param name="height">The height of the desired screen-space.</param>
+    /// <param name="camera">Camera position.</param>
+    public static void SetCameraProjection(int width, int height, Point camera)
+    {
+      // Calculate the offset from the screen center
+      Point offset = new Point(camera.X - (Width / 2), camera.Y - (Height / 2));
+
       float w = width * 0.5f;
       float h = height * 0.5f;
+      int viewPortX = 0;
+      int viewPortY = 0;
 
-      // Setup a 2D camera view
+      TransformWorld = Matrix.Identity;
+
+      // Camera view. Multiply the Y coord by -1 then translate so that everything is relative to the camera position.
       Matrix flipY = Matrix.Scaling(1.0f, -1.0f, 1.0f);
-      Matrix translate = Matrix.Translation(-w, -h, 0.0f);
+      Matrix translate = Matrix.Translation(-(viewPortX + w + offset.X), -(viewPortY + h + offset.Y), 2 * h);
       TransformView = Matrix.Multiply(translate, flipY);
 
-      TransformProjection = Matrix.OrthoOffCenterLH(-w, w, -h, h, 0.0f, 2.0f);
+      // Projection onto screen space
+      TransformProjection = Matrix.PerspectiveOffCenterLH((-w - offset.X) * 0.5f, // Minimum x-value of the view volume.
+                                                           (w - offset.X) * 0.5f, // Maximum x-value of the view volume.
+                                                           (-h + offset.Y) * 0.5f, // Minimum y-value of the view volume.
+                                                           (h + offset.Y) * 0.5f, // Maximum y-value of the view volume.
+                                                           h, // Minimum z-value of the view volume.
+                                                           100 * h); // Maximum z-value of the view volume.
       FinalTransform = TransformView * TransformProjection;
     }
-    
+
     /// <summary>
     /// Fires an event if listeners are available.
     /// </summary>
