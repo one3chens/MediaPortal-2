@@ -49,6 +49,9 @@
             <Button Style="{StaticResource ButtonWideStyle}" Content="Focus movement test"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Command="{Command Source={StaticResource Model},Path=ShowScreenInTransientState,Parameters=test-focus-movement}"/>
+            <Button Style="{StaticResource ButtonWideStyle}" Content="Transforms animated"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Command="{Command Source={StaticResource Model},Path=ShowScreenInTransientState,Parameters=test-transforms2}"/>
           </StackPanel>
         </UniformGrid>
       </DockPanel>
