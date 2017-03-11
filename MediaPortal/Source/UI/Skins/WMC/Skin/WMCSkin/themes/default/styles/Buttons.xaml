@@ -558,12 +558,12 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Grid>
+          <Grid x:Name="SubItemGrid">
             <Grid.Resources>
               <Model x:Key="MouseModel" Id="CA6428A7-A6E2-4dd3-9661-F89CEBAF8E62"/>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="360"/>
+              <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
               <RowDefinition Height="195"/>

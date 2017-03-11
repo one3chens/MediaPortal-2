@@ -223,11 +223,15 @@
               Command="{DynamicResource ResourceKey=Menu_Command}"
               IsEnabled="{Binding Enabled}" SetFocus="{Binding Path=Selected,Mode=OneTime}">
             <Button.Triggers>
+              <Trigger Property="HasFocus" Value="False">
+                <Setter TargetName="SubItemGrid" Property="Width" Value="300"/>
+              </Trigger>
               <Trigger Property="HasFocus" Value="True">
                 <Setter TargetName="ButtonControlGrid" Property="IsVisible" Value="True"/>
                 <Setter TargetName="ItemLabelUnfocused" Property="IsVisible" Value="False"/>
                 <Setter TargetName="ItemLabelUnfocused" Property="Opacity" Value="1"/>
                 <Setter TargetName="ItemLabel" Property="IsVisible" Value="True"/>
+                <Setter TargetName="SubItemGrid" Property="Width" Value="360"/>
                 <!--Setter TargetName="ItemLabel" Property="Color" Value="{ThemeResource TextColor}"/-->
                 <!--Setter TargetName="ItemLabel" Property="Scroll" Value="Auto"/-->
                 <Setter Property="StackPanel.ZIndex" Value="100.0"/>
