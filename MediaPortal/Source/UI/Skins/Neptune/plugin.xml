@@ -1,0 +1,76 @@
+<Plugin
+    DescriptorVersion="1.0"
+    Name="Neptune Skin"
+    PluginId="{4C215978-01A5-4987-A8E0-83E46F32FCA8}"
+    Author="Wizard123"
+    Copyright="GPL"
+    AutoActivate="true"
+    Description="Neptune Skin for MediaPortal 2.">
+
+  <Version
+    PluginVersion="1.0"
+    ReleaseDate="2017-01-01 01:00:00 GMT+01:00"
+    CurrentAPI="1"/>
+
+  <Runtime>
+    <Assembly FileName="Neptune.dll"/>
+  </Runtime>
+
+  <DependsOn>
+    <PluginReference PluginId="{5D239050-02B8-4f58-8301-7630A1C4CF85}" CompatibleAPI="1"/> <!-- SkinBase -->
+    <PluginReference PluginId="{F6C71648-3874-4d27-9232-C41EBEDE0337}" CompatibleAPI="1"/> <!-- BackgroundManager -->
+    <PluginReference PluginId="{15FB35F7-8C85-4404-BC67-BFF28446158A}" CompatibleAPI="2"/> <!-- Media -->
+    <PluginReference PluginId="{1AFF4467-64B0-4ca1-AF28-9AEDF3525BCE}" CompatibleAPI="1"/> <!-- ConfigurationManager -->
+    <PluginReference PluginId="{B765A4B6-F455-4941-BDAE-2CE45208BFEB}" CompatibleAPI="1"/> <!-- Configuration plugin -->
+    <PluginReference PluginId="{E5326D7C-698F-48C2-AA15-AD6CCBD1A96F}" CompatibleAPI="2"/> <!-- SystemStateMenu plugin -->
+    <PluginReference PluginId="{B4D6171B-81CB-4813-ACBE-FD3133ADC504}" CompatibleAPI="1"/> <!-- SkinSettings plugin -->
+  </DependsOn>
+
+  <Register Location="/Models">
+    <Model Id="274A6765-ECAF-4BCF-AB97-E6DCD67CE3E2" Name="HomeMenuModel" ClassName="MediaPortal.UiComponents.Neptune.Models.HomeMenuModel"/>
+    <Model Id="2DA7A198-D158-4A74-B8C4-0D75CC863CE3" Name="LatestMediaModel" ClassName="MediaPortal.UiComponents.Neptune.Models.LatestMediaModel"/>
+    <Model Id="7E252D7F-0ACD-46D1-9BCE-436B12110537" Name="SetupModel" ClassName="MediaPortal.UiComponents.Neptune.Models.SetupModel"/>
+    <Model Id="60C4935F-47EA-4103-A9AD-CB198FA40764" Name="PowerMenuModel" ClassName="MediaPortal.UiComponents.Neptune.Models.PowerMenuModel"/>
+  </Register>
+
+  <Register Location="/Workflow/States">
+    <DialogState Id="F3A23F49-C9CA-4FFE-9A2D-CCC7B936A2A8" Name="NeptuneConfiguration" DialogScreen="dialogNeptuneConfiguration"
+        DisplayLabel="[Settings.Plugins.Trakt.TraktSetup]" WorkflowModel="7E252D7F-0ACD-46D1-9BCE-436B12110537"/>
+  </Register>
+
+  <!-- Language resources -->
+  <Register Location="/Resources/Language">
+    <Resource Id="NeptuneLanguage" Directory="Language" Type="Language"/>
+  </Register>
+
+  <Register Location="/Resources/Skin">
+    <Resource Id="NeptuneSkin" Directory="Skin" Type="Skin"/>
+  </Register>
+
+  <!-- Contents of '/Appearance' section -->
+  <Register Location="/Configuration/Settings/Appearance">
+    <ConfigSection
+        Id="Skin"
+        Redundant="true"
+        Text="[Settings.Appearance.Skin]"/>
+  </Register>
+
+  <!-- Contents of '/Appearance/Skin' section -->
+  <Register Location="/Configuration/Settings/Appearance/Skin">
+    <ConfigSection
+        Id="SkinSettings"
+        Redundant="true"
+        Text="[SkinSettings.Configuration.SkinSettings]"/>
+  </Register>
+
+  <!-- Contents of '/Appearance/Skin/SkinSettings' section -->
+  <Register Location="/Configuration/Settings/Appearance/Skin/SkinSettings">
+    <CustomConfigSetting
+        Id="NeptuneSetup"
+        Text="[Neptune.Configuration]"
+        HelpText="[Neptune.Configuration.Help]"
+        ClassName="MediaPortal.UiComponents.Neptune.Settings.Configuration.MenuSettingsConfiguration"
+        AdditionalData="WorkflowState=F3A23F49-C9CA-4FFE-9A2D-CCC7B936A2A8,ConfAppPanel=..."/>
+  </Register>
+
+</Plugin>

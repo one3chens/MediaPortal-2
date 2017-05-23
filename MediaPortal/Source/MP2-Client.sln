@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{26B21F24-5C09-4F49-ABE3-C1B3F9059D2B}"
 EndProject
@@ -221,6 +221,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerStateService.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerStateService.Client", "Backend\BackendComponents\ServerStateService\ServerStateService.Client\ServerStateService.Client.csproj", "{FDC93BA2-C254-4339-B892-E974E26AEB37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neptune", "UI\Skins\Neptune\Neptune.csproj", "{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -328,7 +330,6 @@ Global
 		{C645C665-A509-4209-870C-88582853A0AC}.Release|x86.ActiveCfg = Release|x86
 		{C645C665-A509-4209-870C-88582853A0AC}.Release|x86.Build.0 = Release|x86
 		{3847A3EA-8B43-4C6E-AFD2-711A867E2FE2}.Debug|x86.ActiveCfg = Debug|x86
-		{3847A3EA-8B43-4C6E-AFD2-711A867E2FE2}.Debug|x86.Build.0 = Debug|x86
 		{3847A3EA-8B43-4C6E-AFD2-711A867E2FE2}.Release|x86.ActiveCfg = Release|x86
 		{3474F9BE-E4E1-4B8E-9A2D-B02C2E230E06}.Debug|x86.ActiveCfg = Debug|x86
 		{3474F9BE-E4E1-4B8E-9A2D-B02C2E230E06}.Debug|x86.Build.0 = Debug|x86
@@ -339,7 +340,6 @@ Global
 		{33721BC7-193A-4B80-9CFF-DC8A50700443}.Release|x86.ActiveCfg = Release|x86
 		{33721BC7-193A-4B80-9CFF-DC8A50700443}.Release|x86.Build.0 = Release|x86
 		{D2F9E3AD-D2BB-45F9-9B1A-93C52F76FA19}.Debug|x86.ActiveCfg = Debug|x86
-		{D2F9E3AD-D2BB-45F9-9B1A-93C52F76FA19}.Debug|x86.Build.0 = Debug|x86
 		{D2F9E3AD-D2BB-45F9-9B1A-93C52F76FA19}.Release|x86.ActiveCfg = Release|x86
 		{4E73672B-B668-4153-A6F2-0F45B5C3724B}.Debug|x86.ActiveCfg = Debug|x86
 		{4E73672B-B668-4153-A6F2-0F45B5C3724B}.Debug|x86.Build.0 = Debug|x86
@@ -436,7 +436,6 @@ Global
 		{29935593-E22E-44A9-A9A2-683D5C0F3E57}.Release|x86.ActiveCfg = Release|x86
 		{29935593-E22E-44A9-A9A2-683D5C0F3E57}.Release|x86.Build.0 = Release|x86
 		{5B09CF07-6386-44C1-B786-CAAC78835CAA}.Debug|x86.ActiveCfg = Debug|x86
-		{5B09CF07-6386-44C1-B786-CAAC78835CAA}.Debug|x86.Build.0 = Debug|x86
 		{5B09CF07-6386-44C1-B786-CAAC78835CAA}.Release|x86.ActiveCfg = Release|x86
 		{C4A45FA7-BCD1-4B14-B6D5-051A780EB83B}.Debug|x86.ActiveCfg = Debug|x86
 		{C4A45FA7-BCD1-4B14-B6D5-051A780EB83B}.Debug|x86.Build.0 = Debug|x86
@@ -500,7 +499,6 @@ Global
 		{48186950-463A-418C-983E-FF4F62B02E02}.Release|x86.ActiveCfg = Release|x86
 		{48186950-463A-418C-983E-FF4F62B02E02}.Release|x86.Build.0 = Release|x86
 		{D8025D85-C4BE-4A3C-8DD1-4B89DB422480}.Debug|x86.ActiveCfg = Debug|x86
-		{D8025D85-C4BE-4A3C-8DD1-4B89DB422480}.Debug|x86.Build.0 = Debug|x86
 		{D8025D85-C4BE-4A3C-8DD1-4B89DB422480}.Release|x86.ActiveCfg = Release|x86
 		{D8025D85-C4BE-4A3C-8DD1-4B89DB422480}.Release|x86.Build.0 = Release|x86
 		{3476BFD3-B634-4BAB-8E0F-12921019B7B0}.Debug|x86.ActiveCfg = Debug|x86
@@ -516,7 +514,6 @@ Global
 		{7F790D8D-3A5A-499F-B9D3-8D9A1EF4F73A}.Release|x86.ActiveCfg = Release|x86
 		{7F790D8D-3A5A-499F-B9D3-8D9A1EF4F73A}.Release|x86.Build.0 = Release|x86
 		{A0493D76-A38B-4B0F-92E6-B7B51200D005}.Debug|x86.ActiveCfg = Debug|x86
-		{A0493D76-A38B-4B0F-92E6-B7B51200D005}.Debug|x86.Build.0 = Debug|x86
 		{A0493D76-A38B-4B0F-92E6-B7B51200D005}.Release|x86.ActiveCfg = Release|x86
 		{A0493D76-A38B-4B0F-92E6-B7B51200D005}.Release|x86.Build.0 = Release|x86
 		{89526B39-E674-4618-807A-7D3D11F48098}.Debug|x86.ActiveCfg = Debug|x86
@@ -532,7 +529,6 @@ Global
 		{9B2DA988-87CE-421F-A4A3-679A45163599}.Release|x86.ActiveCfg = Release|Any CPU
 		{9B2DA988-87CE-421F-A4A3-679A45163599}.Release|x86.Build.0 = Release|Any CPU
 		{874401F8-1283-4C20-8EFA-FD0EE7AD53A8}.Debug|x86.ActiveCfg = Debug|x86
-		{874401F8-1283-4C20-8EFA-FD0EE7AD53A8}.Debug|x86.Build.0 = Debug|x86
 		{874401F8-1283-4C20-8EFA-FD0EE7AD53A8}.Release|x86.ActiveCfg = Release|x86
 		{874401F8-1283-4C20-8EFA-FD0EE7AD53A8}.Release|x86.Build.0 = Release|x86
 		{D6DFE439-30B7-4B0B-A80F-D2D65363E9FF}.Debug|x86.ActiveCfg = Debug|x86
@@ -555,6 +551,10 @@ Global
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Debug|x86.Build.0 = Debug|x86
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Release|x86.ActiveCfg = Release|x86
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Release|x86.Build.0 = Release|x86
+		{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC}.Debug|x86.ActiveCfg = Debug|x86
+		{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC}.Debug|x86.Build.0 = Debug|x86
+		{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC}.Release|x86.ActiveCfg = Release|x86
+		{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -661,5 +661,6 @@ Global
 		{01C1F58C-A510-43BA-B2C7-E7E27DCB2396} = {5B0609A9-F3B5-41F8-81A5-3CE327A4ECD7}
 		{1CD36F37-70FF-442F-8B1E-528F41D76F34} = {01C1F58C-A510-43BA-B2C7-E7E27DCB2396}
 		{FDC93BA2-C254-4339-B892-E974E26AEB37} = {01C1F58C-A510-43BA-B2C7-E7E27DCB2396}
+		{27B975D0-65C2-47CD-A2C0-2FA3F22F5DDC} = {9579F1D5-315A-4528-AC60-FA7D61874E27}
 	EndGlobalSection
 EndGlobal
