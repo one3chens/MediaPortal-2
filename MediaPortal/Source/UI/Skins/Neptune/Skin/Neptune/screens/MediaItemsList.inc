@@ -17,8 +17,10 @@
   <!-- All KeyBindings are included from shared resource -->
   <Include Source="screens\MediaItemsFilterKeyBindings.inc"/>
 
+  <!--######################################### PAGE INDICATOR FOR LIST VIEWS ################################################-->
+  
   <DockPanel DataContext="{Binding Source={Model 4CDD601F-E280-43b9-AD0A-6D7B2403C856},Path=NavigationData.CurrentScreenData}"
-     VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="false" Margin="10,-85,0,0"
+     VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="false" Margin="-20,-20,0,0"
      IsVisible="{Binding IsItemsValid}">
     <!---Grid+CoverView-->
     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
@@ -31,7 +33,7 @@
           </MultiBinding>
         </Label.Content>
       </Label>
-      <Label Color="{ThemeResource TextColor}" FontFamily="DefaultBold" Content="| " FontSize="{ThemeResource SmallFontSize}" Opacity="1"/>
+      <Label Color="{ThemeResource TextColor}" FontFamily="DefaultBold" Content="| " FontSize="{ThemeResource SmallerFontSize}" Opacity="1"/>
       <Label Color="{ThemeResource TextColor}" FontFamily="DefaultBold" Content="{Binding NumItems}" FontSize="{ThemeResource SmallFontSize}" Opacity="1"/>
     </StackPanel>
   </DockPanel>
@@ -56,7 +58,7 @@
     </ListView>
     <Label IsVisible="{Binding ShowListHint}"
         HorizontalAlignment="Center" VerticalAlignment="Center" Wrap="true"
-        Content="{Binding ListHint}" Color="{ThemeResource HintTextColor}"/>
+        Content="{Binding ListHint}" Color="{ThemeResource HintTextColor}" FontSize="{ThemeResource ListFontSize}"/>
   </Grid>
   <Label IsVisible="{Binding !IsItemsValid}"
       HorizontalAlignment="Center" VerticalAlignment="Center"

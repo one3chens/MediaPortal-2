@@ -25,7 +25,9 @@
 
   <ResourceWrapper x:Key="DateTimeFontSize" Resource="26"/>
 
-  <ResourceWrapper x:Key="BiggerFontSize" Resource="44"/>
+  <ResourceWrapper x:Key="StandardFontSize" Resource="38"/>
+  <ResourceWrapper x:Key="ListFontSize" Resource="32"/>
+  <ResourceWrapper x:Key="BiggerFontSize" Resource="52"/>
   <ResourceWrapper x:Key="BigFontSize" Resource="36"/>
   <ResourceWrapper x:Key="SmallFontSize" Resource="24"/>
   <ResourceWrapper x:Key="SmallerFontSize" Resource="22"/>
@@ -66,7 +68,7 @@
   <ResourceWrapper x:Key="ScrollBarKnobHeight" Resource="14"/>
 
   <!-- Footer Details -->
-  <ResourceWrapper x:Key="MultiDetailsFooterHeight" Resource="210"/>
+  <ResourceWrapper x:Key="MultiDetailsFooterHeight" Resource="250"/>
   <ResourceWrapper x:Key="MultiDetailsFooterMargin" Resource="0,0,-45,0"/>
   
 </ResourceDictionary>

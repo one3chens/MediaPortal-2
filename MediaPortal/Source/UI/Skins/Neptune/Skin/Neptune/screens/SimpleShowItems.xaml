@@ -17,17 +17,19 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*"/>
           <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <Control Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+		
+	    <Rectangle Fill="Black" Margin="30,0,0,0" Stroke="Black" Opacity="0.35" Grid.Row="0" Grid.Column="1"/>
+		
+        <Control Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="75,30,0,30">
           <Control.TemplateControl>
             <Include Source="screens\MediaItemsList.inc"/>
           </Control.TemplateControl>
         </Control>
 
-        <Control Grid.Column="1" VerticalAlignment="Stretch" MinWidth="860" Width="{DynamicResource Cover_Width}"
+        <Control Grid.Column="0" VerticalAlignment="Stretch" MinWidth="340" Width="340"
           Template="{Binding Source={DynamicResource Media_Details_Template}}">
           <Control.IsVisible>
             <Binding Source="{StaticResource ViewModeModel}" Path="LayoutType" Converter="{StaticResource ExpressionValueConverter}" ConverterParameter="{}{0} != {LayoutType}.{CoverLayout}"/>

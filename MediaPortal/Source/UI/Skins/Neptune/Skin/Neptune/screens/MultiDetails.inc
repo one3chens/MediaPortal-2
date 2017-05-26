@@ -140,6 +140,14 @@
     </Control.TemplateControl>
   </Control>
 
+ <Grid>
+    <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="1250"/>
+    <ColumnDefinition Width="*"/>
+  </Grid.ColumnDefinitions>
   <!-- Show help label only in "Home" workflow state to avoid overlapping with contents in other screens -->
   <Label DataContext="{Binding Source={StaticResource BackgroundManagerModel}, Path=SelectedItem}" Content="{Binding [Help]}" Color="{ThemeResource TextColor}" Wrap="True">
     <Label.IsVisible>
@@ -149,4 +157,5 @@
       </MultiBinding>
     </Label.IsVisible>
   </Label>
+  </Grid>
 </Grid>

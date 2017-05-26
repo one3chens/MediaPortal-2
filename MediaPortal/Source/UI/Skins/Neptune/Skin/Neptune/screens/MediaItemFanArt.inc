@@ -16,19 +16,15 @@
   <Grid.RowDefinitions>
     <RowDefinition Height="*"/>
   </Grid.RowDefinitions>
-  <Grid.OpacityMask>
-    <VisualBrush Visual="{Binding ElementName=mask}"/>
-  </Grid.OpacityMask>
-  
-  <Rectangle x:Name="mask" Fill="Black" RadiusY="15" RadiusX="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-  <Image x:Name="thumb" VerticalAlignment="Stretch" Stretch="UniformToFill" Margin="0,0,0,0">
+  <Image x:Name="thumb" VerticalAlignment="Stretch" Stretch="UniformToFill" Margin="0,-10,0,-20">
     <Image.Source>
-      <ImageSourceWrapper Delay="0.5" DelayInOut="true" Transition="transitions\dissolve" TransitionDuration="0.5"
-                      Source="{Binding Source={StaticResource FanArtBackgroundModel}, Path=ImageSource, Converter={StaticResource FanArtImageSourceConverter}, ConverterParameter=FanArt;810;560;False}"
+      <ImageSourceWrapper Delay="0" DelayInOut="true" Transition="transitions\dissolve" TransitionDuration="0"
+                      Source="{Binding Source={StaticResource FanArtBackgroundModel}, Path=ImageSource, Converter={StaticResource FanArtImageSourceConverter}, ConverterParameter=Poster;600;700;False}"
                       FallbackSource="{Binding Source={StaticResource FanArtBackgroundModel},Path=MediaItem}" />
     </Image.Source>
   </Image>
+
 </Grid>
 
 

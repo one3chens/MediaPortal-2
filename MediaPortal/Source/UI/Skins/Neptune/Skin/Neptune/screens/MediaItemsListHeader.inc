@@ -5,6 +5,6 @@
     DataContext="{Binding Source={Model 4CDD601F-E280-43b9-AD0A-6D7B2403C856},Path=NavigationData.CurrentScreenData}"
     VerticalAlignment="Center" HorizontalAlignment="Stretch" LastChildFill="false"
     IsVisible="{Binding IsItemsValid}"> <!-- Model = MediaNavigationModel -->
-  <Label Color="{ThemeResource TextColor}" Content="{Binding NumItemsStr}" FontSize="{ThemeResource SmallFontSize}"
+  <Label Color="{ThemeResource TextColor}" Content="{Binding NumItemsStr}" FontSize="{ThemeResource ListFontSize}"
           DockPanel.Dock="Left" FontFamily="DefaultBold"/>
 </DockPanel>

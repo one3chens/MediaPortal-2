@@ -71,10 +71,15 @@ Parameters which have to be accessible by a DynamicResource lookup:
         <TranslateTransform X="0" Y="0"/>
       </TransformGroup>
     </Grid.RenderTransform>
-
+	
+	<!--
+		##############################################################################################################################################################################################
+		############################################################################# CONFIGURE THE NUMBER OF GRID ROWS ##############################################################################
+		##############################################################################################################################################################################################
+	-->
     <Grid.RowDefinitions>
       <!-- Breadcrumb -->
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="350"/>
       <!-- Header -->
       <RowDefinition Height="Auto"/>
       <!-- Content -->
@@ -82,27 +87,80 @@ Parameters which have to be accessible by a DynamicResource lookup:
       <!-- Shadow -->
       <RowDefinition Height="Auto"/>
       <!-- Footer -->
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="60"/>
     </Grid.RowDefinitions>
 
-    <Grid x:Name="HeaderPanel" Grid.Row="0"  Height="{ThemeResource HeaderPanelHeight}" IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}">
+	<!-- FooterPanel -->
+	<!--
+		##############################################################################################################################################################################################
+		################################################################################ INFO AREA AT TOP OF HOMESCREEN ##############################################################################
+		##############################################################################################################################################################################################
+	-->
+	
+	<Grid Margin="50,30,50,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="{ThemeResource MultiDetailsFooterHeight}">
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="1250"/>
+		<ColumnDefinition Width="700"/>
       </Grid.ColumnDefinitions>
 
-      <mp_special_controls:WorkflowNavigationBar Style="{ThemeResource WorkflowNavigationBarStyle}" Grid.Column="0"
-          IsVisible="{Binding Source={StaticResource MouseModel},Path=IsMouseUsed}"/>
+      <!-- MediaItem related: title and description -->
+      <Control x:Name="AlternativeFooterControl"
+         HorizontalAlignment="Stretch"
+         Template="{DynamicResource ResourceKey=Alternative_Footer_Template}" Grid.ColumnSpan="2">
+      </Control>
 
-      <StackPanel Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-        <Control x:Name="NotificationControl" Margin="0,-10,20,-20"  Style="{ThemeResource NotificationControlStyle}" />
+      <!-- PlayerControlsPanel Focusable="True"-->
+      <Grid x:Name="FooterPanel" Grid.Row="3" Height="{ThemeResource FooterPanelHeight}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
+                  IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}">
+      </Grid>
+	  
+	<!--
+		##############################################################################################################################################################################################
+		########################################################################### time and recording info etc in top right #########################################################################
+		##############################################################################################################################################################################################
+	-->
+		
+      <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+		          <Label x:Name="TimeLabel" Content="{Binding Source={StaticResource TimeModel}, Path=CurrentTime}" FontSize="{ThemeResource BiggerFontSize}" FontFamily="DefaultBold"
+                   Color="{ThemeResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
+                      DataContext="{Binding Source={StaticResource StateModel}, Path=[C37B62D0-8E87-42A4-877E-B41944DA9FC9]}"
+                      IsVisible="{Binding Converter={StaticResource ReferenceToBoolConverter}}">
+            <Label FontSize="{ThemeResource TinyFontSize}" Margin="10,-5,0,-10" 
+                   Color="{ThemeResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Right">
+              <Label.IsVisible>
+                <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0}>=0">
+                  <Binding Path="Progress"/>
+                </MultiBinding>
+              </Label.IsVisible>
+              <Label.Content>
+                <Binding Path="Progress" Converter="{StaticResource StringFormatConverter}" ConverterParameter="{}{0}%"/>
+              </Label.Content>
+            </Label>
+            <Button Style="{ThemeResource ImportingButtonStyle}" IsVisible="{Binding IsImporting}" VerticalAlignment="Center" 
+                    HorizontalAlignment="Left" Margin="0,-5,0,-10"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
+                      DataContext="{Binding Source={StaticResource StateModel}, Path=[2A58935C-3363-4FA1-B48D-1EF0E81F830D]}"
+                      IsVisible="{Binding Converter={StaticResource ReferenceToBoolConverter}}">
+            <Button Style="{ThemeResource RecordingButtonStyle}" IsVisible="{Binding IsRecording}" VerticalAlignment="Center" Margin="0,-4,0,-16"/>
+          </StackPanel>
+        </StackPanel>
       </StackPanel>
     </Grid>
-    <!-- HeaderPanel -->
+    
+    
+	<!--
+		##############################################################################################################################################################################################
+		################################################################################# HEADER PANEL FOR MENU ITEMS ################################################################################
+		##############################################################################################################################################################################################
+	-->
 
-    <Grid  Grid.Row="1" HorizontalAlignment="Stretch">
+    <Grid  Grid.Row="3" HorizontalAlignment="Stretch">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
@@ -144,38 +202,7 @@ Parameters which have to be accessible by a DynamicResource lookup:
         </bvm:GroupMenuListView.Resources>
       </bvm:GroupMenuListView>
 
-      <!-- Time & Date -->
-      <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="-70,-5,10,0" VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
-                      DataContext="{Binding Source={StaticResource StateModel}, Path=[C37B62D0-8E87-42A4-877E-B41944DA9FC9]}"
-                      IsVisible="{Binding Converter={StaticResource ReferenceToBoolConverter}}">
-            <Label FontSize="{ThemeResource TinyFontSize}" Margin="10,-5,0,-10" 
-                   Color="{ThemeResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Right">
-              <Label.IsVisible>
-                <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0}>=0">
-                  <Binding Path="Progress"/>
-                </MultiBinding>
-              </Label.IsVisible>
-              <Label.Content>
-                <Binding Path="Progress" Converter="{StaticResource StringFormatConverter}" ConverterParameter="{}{0}%"/>
-              </Label.Content>
-            </Label>
-            <Button Style="{ThemeResource ImportingButtonStyle}" IsVisible="{Binding IsImporting}" VerticalAlignment="Center" 
-                    HorizontalAlignment="Left" Margin="0,-5,0,-10"/>
-          </StackPanel>
-          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
-                      DataContext="{Binding Source={StaticResource StateModel}, Path=[2A58935C-3363-4FA1-B48D-1EF0E81F830D]}"
-                      IsVisible="{Binding Converter={StaticResource ReferenceToBoolConverter}}">
-            <Button Style="{ThemeResource RecordingButtonStyle}" IsVisible="{Binding IsRecording}" VerticalAlignment="Center" Margin="0,-4,0,-16"/>
-          </StackPanel>
-          <Label x:Name="TimeLabel" Content="{Binding Source={StaticResource TimeModel}, Path=CurrentTime}" FontSize="{ThemeResource BiggerFontSize}" FontFamily="DefaultBold"
-                   Color="{ThemeResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        </StackPanel>
-        
-        <Label x:Name="DateLabel" Content="{Binding Source={StaticResource TimeModel}, Path=CurrentDate}" FontSize="{ThemeResource SmallFontSize}" FontFamily="DefaultBold"
-               Color="{ThemeResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,-8,0,0"/>
-      </StackPanel>
+
 
       <!-- Menu button -->
       <Control Grid.Row="0" Grid.Column="3" Margin="15,0,0,0" VerticalAlignment="Center"
@@ -185,36 +212,36 @@ Parameters which have to be accessible by a DynamicResource lookup:
       <Control Grid.Row="0" Grid.Column="3" Margin="15,0,0,0" VerticalAlignment="Center"
                x:Name="MenuButtonPlaceholder" Template="{DynamicResource ResourceKey=Menu_Button_Placeholder}"></Control>
 
-      <Image Source="shadow_top.png" Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,0,0" />
     </Grid>
 
-    <Image Source="shadow_bottom.png" Margin="-115,0,-115,0" Grid.Row="3" VerticalAlignment="Top" />
-
-    <Grid Margin="115,10,115,0" Grid.Row="4" VerticalAlignment="Top" Height="{ThemeResource MultiDetailsFooterHeight}">
+	
+	<!--
+		##############################################################################################################################################################################################
+		####################################################### THIS IS THE NESTED TIMELINE OF WHERE YOU ARE IN MEDIAPORTAL (WORKFLOW) ###############################################################
+		##############################################################################################################################################################################################
+	--> 
+	<Grid x:Name="HeaderPanel" Grid.Row="4"  Height="{ThemeResource HeaderPanelHeight}" IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}">
       <Grid.RowDefinitions>
-        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <!-- MediaItem related: title and description -->
-      <Control x:Name="AlternativeFooterControl"
-         HorizontalAlignment="Stretch"
-         Template="{DynamicResource ResourceKey=Alternative_Footer_Template}">
-      </Control>
+      <mp_special_controls:WorkflowNavigationBar Style="{ThemeResource WorkflowNavigationBarStyle}" Grid.Column="0"
+          IsVisible="{Binding Source={StaticResource MouseModel},Path=IsMouseUsed}"/>
 
-      <!-- PlayerControlsPanel Focusable="True"-->
-      <Grid x:Name="FooterPanel" Grid.Row="3" Height="{ThemeResource FooterPanelHeight}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
-                  IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}">
-
-      </Grid>
-
+      <StackPanel Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+        <Control x:Name="NotificationControl" Margin="50,0,50,0"  Style="{ThemeResource NotificationControlStyle}" />
+      </StackPanel>
     </Grid>
-    <!-- FooterPanel -->
-
-    <!-- Order matters here: The client area control has to be the last control (LastChildFill) -->
-    <Control x:Name="ClientArea" Grid.Row="2" Template="{DynamicResource ResourceKey=Client_Template}" Margin="115,17,115,-3"/>
+ 
+	<!--
+		##############################################################################################################################################################################################
+		####################################################### CLIENT AREA IS THE MAIN INFO PANEL FOR LISTS/THUMB PANELS ETC ########################################################################
+		##############################################################################################################################################################################################
+	--> 
+    <Control x:Name="ClientArea" Grid.Row="2" Template="{DynamicResource ResourceKey=Client_Template}" Margin="50,17,50,-3"/>
 
   </Grid>
 </Screen>
