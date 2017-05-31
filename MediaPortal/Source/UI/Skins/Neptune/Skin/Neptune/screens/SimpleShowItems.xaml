@@ -17,23 +17,20 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="370"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 		
-	    <Rectangle Fill="Black" Margin="30,0,0,0" Stroke="Black" Opacity="0.35" Grid.Row="0" Grid.Column="1"/>
+	    
 		
-        <Control Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="75,30,0,30">
+        <Control Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,40,0,5">
           <Control.TemplateControl>
             <Include Source="screens\MediaItemsList.inc"/>
           </Control.TemplateControl>
         </Control>
 
-        <Control Grid.Column="0" VerticalAlignment="Stretch" MinWidth="340" Width="340"
+        <Control Grid.Column="0" VerticalAlignment="Stretch" MinWidth="{DynamicResource Poster_Width}" Width="340" Margin="10,-2,30,0"
           Template="{Binding Source={DynamicResource Media_Details_Template}}">
-          <Control.IsVisible>
-            <Binding Source="{StaticResource ViewModeModel}" Path="LayoutType" Converter="{StaticResource ExpressionValueConverter}" ConverterParameter="{}{0} != {LayoutType}.{CoverLayout}"/>
-          </Control.IsVisible>
         </Control>
       </Grid>
     </ControlTemplate>

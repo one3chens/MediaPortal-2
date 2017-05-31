@@ -69,8 +69,8 @@
   
   <!-- MOVIE DESCRIPTION -->
   
-  <Label x:Name="MediaItemDescription" Wrap="True" Grid.Column="0" Grid.Row="1"
-        TextTrimming="WordEllipsis" HorizontalAlignment="Stretch" Opacity="0.6"
+  <Label x:Name="MediaItemDescription" Wrap="True" Scroll="Auto" ScrollDelay="8" Grid.Column="0" Grid.Row="1"
+        HorizontalAlignment="Stretch" Opacity="0.6"
         Content="{Binding Source={StaticResource FanArtBackgroundModel}, Path=ItemDescription}"
         Color="{ThemeResource TextColor}" FontSize="{ThemeResource StandardFontSize}" Margin="10,5,-150,10" />
 

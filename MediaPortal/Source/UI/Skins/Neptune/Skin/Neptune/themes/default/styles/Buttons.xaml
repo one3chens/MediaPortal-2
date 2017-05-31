@@ -615,13 +615,18 @@
     </Setter>
   </Style>
 
+	<!--
+		##############################################################################################################################################################################################
+		########################################################################### THUMBS VIEW STYLING FOR MEDIA ITEMS FOCUSED ######################################################################
+		##############################################################################################################################################################################################
+	--> 
+	
   <Style x:Key="MediaItemButtonCoverControlStyle" TargetType="{x:Type Control}">
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
           <Border x:Name="ButtonControlRectangle"
               IsVisible ="False"
-              CornerRadius="{ThemeResource MediumRadiusFocus}"
               BorderBrush="{ThemeResource MediaItemsFocusedBorderBrush}"
               BorderThickness="3" Margin="0">
           </Border>
@@ -649,24 +654,23 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Grid x:Name="GrowControl" RenderTransformOrigin="0.5,0.5" Margin="2">
+          <Grid x:Name="GrowControl" RenderTransformOrigin="0.5,0.5">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
+              <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
             <Grid.RenderTransform>
               <TransformGroup>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
               </TransformGroup>
             </Grid.RenderTransform>
-            <Rectangle x:Name="ButtonControlRectangle"
-             Opacity="1"
-             RadiusX="{ThemeResource ButtonControlRadiusX}" RadiusY="{ThemeResource ButtonControlRadiusY}"
-             Margin="0,0,0,0" Fill="{ThemeResource ButtonFillColor}" Stroke="{ThemeResource ButtonStrokeColor}" StrokeThickness="0">
+            <Rectangle x:Name="ButtonControlRectangle" 
+                      IsVisible="False"
+                      Fill="{ThemeResource ButtonFillColor}" Stroke="{ThemeResource ButtonStrokeColor}" StrokeThickness="0">
             </Rectangle>
-            <ContentPresenter x:Name="ButtonContentPresenter" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ContentPresenter x:Name="ButtonContentPresenter" Margin="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger Property="HasFocus" Value="True">
@@ -741,6 +745,8 @@
     </Setter>
   </Style>
 
+ 
+	
   <Style x:Key="MediaItemButtonCoverStyle" TargetType="{x:Type Button}">
     <Setter Property="Template">
       <Setter.Value>
@@ -794,6 +800,13 @@
     </Setter>
   </Style>
 
+	<!--
+		##############################################################################################################################################################################################
+		##################################################################### COVERFLOW HIGHLIGHT RECTANGLE AND ONFOCUS TRIGGERS #####################################################################
+		##############################################################################################################################################################################################
+	-->
+
+	
   <Style x:Key="MediaItemButtonCoverFlowStyle" TargetType="{x:Type Button}">
     <Setter Property="Template">
       <Setter.Value>
@@ -818,11 +831,11 @@
             <Trigger Property="HasFocus" Value="True">
               <Setter TargetName="ButtonControlRectangle" Property="IsVisible" Value="True"/>
               <Trigger.EnterActions>
-                <BeginStoryboard x:Name="Focused_BeginStoryboard" Storyboard="{ThemeResource FocusedMediaStoryboard_GrowOnly}"/>
+                <!--<BeginStoryboard x:Name="Focused_BeginStoryboard" Storyboard="{ThemeResource FocusedMediaStoryboard_GrowOnly}"/>-->
                 <SoundPlayerAction Source="navigate.wav" DisableOnAudioOutput="True"/>
               </Trigger.EnterActions>
               <Trigger.ExitActions>
-                <StopStoryboard BeginStoryboardName="Focused_BeginStoryboard"/>
+                <!--<StopStoryboard BeginStoryboardName="Focused_BeginStoryboard"/>-->
               </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
