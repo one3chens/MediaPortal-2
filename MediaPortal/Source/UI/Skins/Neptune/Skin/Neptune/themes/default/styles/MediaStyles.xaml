@@ -372,6 +372,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+		
         <Grid.OpacityMask>
           <VisualBrush>
             <VisualBrush.Visual>

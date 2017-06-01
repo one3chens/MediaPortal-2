@@ -11,7 +11,7 @@
   </ResourceWrapper>
 
   <!-- Default brush used to paint the background of a dialog -->
-  <ResourceWrapper x:Key="DialogBackgroundBrush" Value="#B0000000" />
+  <ResourceWrapper x:Key="DialogBackgroundBrush" Value="#FF333333" />
 
   <!-- Home screen tile opacity brush -->
   <ResourceWrapper x:Key="HomeTileOpacityBrush">

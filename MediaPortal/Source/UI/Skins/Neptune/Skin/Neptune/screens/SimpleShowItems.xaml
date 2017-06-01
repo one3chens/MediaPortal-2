@@ -8,21 +8,57 @@
     >
   <Include.Resources>
 
+  <Model x:Key="MenuModel" Id="274A6765-ECAF-4BCF-AB97-E6DCD67CE3E2"/>
     <!-- Header_Text resource has to be added by including screen -->
 
     <!-- Contents -->
     <ControlTemplate x:Key="Contents_Template">
-      <Grid>
-        <Grid.RowDefinitions>
+      <Grid x:Name="MainContent">
+	  
+		<Grid.Triggers>
+			<DataTrigger Binding="{Binding Source={StaticResource MenuModel},Path=IsMenuOpen}" Value="True">
+				<DataTrigger.EnterActions>
+                  <BeginStoryboard x:Name="SlideIn">
+				    <BeginStoryboard.Storyboard>
+					<Storyboard>
+						<DoubleAnimation
+							Storyboard.TargetName="MainContent" 
+							Storyboard.TargetProperty="RenderTransform.X"
+							From="0" To="-510" BeginTime="0:0:0" Duration="00:00:00.35"
+							FillBehavior="HoldEnd"/>
+					</Storyboard>
+					</BeginStoryboard.Storyboard>
+				  </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+				  <BeginStoryboard x:Name="SlideOut">
+					<BeginStoryboard.Storyboard>
+					<Storyboard>
+						<DoubleAnimation
+							Storyboard.TargetName="MainContent" 
+							Storyboard.TargetProperty="RenderTransform.X"
+							From="-510" To="0" BeginTime="0:0:0" Duration="00:00:00.35"
+							FillBehavior="HoldEnd"/>
+					</Storyboard>
+					</BeginStoryboard.Storyboard>
+				  </BeginStoryboard>
+                  <StopStoryboard BeginStoryboardName="SlideIn"/>
+                </DataTrigger.ExitActions>
+			</DataTrigger>
+	    </Grid.Triggers>		  
+	  
+	    <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="370"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+		<Grid.RenderTransform>
+		  <TranslateTransform X="0"/>
+        </Grid.RenderTransform>
 		
-	    
-		
+
         <Control Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,40,0,5">
           <Control.TemplateControl>
             <Include Source="screens\MediaItemsList.inc"/>

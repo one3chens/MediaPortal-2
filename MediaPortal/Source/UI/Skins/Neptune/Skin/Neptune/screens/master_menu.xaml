@@ -53,19 +53,25 @@ Parameters which have to be accessible by a DynamicResource lookup:
     
     <Model x:Key="MenuModel" Id="274A6765-ECAF-4BCF-AB97-E6DCD67CE3E2"/>
 
-    <!--Common animations for the FadeBackground when the hidden menu is shown-->    
+	
+	<!--
+		##############################################################################################################################################################################################
+		######################################################################## ANIMATIONS FOR FADEBACKGROUND WHEN MENU VISIBLE #####################################################################
+		##############################################################################################################################################################################################
+	-->  
+	
     <Storyboard x:Key="FadeInStoryboard" FillBehavior="HoldEnd">
       <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="FadeBackground" Storyboard.TargetProperty="IsVisible">
         <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="True"/>
       </ObjectAnimationUsingKeyFrames>
       <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.01" FillBehavior="HoldEnd" Storyboard.TargetName="FadeBackground" Storyboard.TargetProperty="Opacity">
         <SplineDoubleKeyFrame KeyTime="00:00:00.01" Value="0"/>
-        <SplineDoubleKeyFrame KeyTime="00:00:00.65" Value="0.6"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:00.65" Value="0.1"/>
       </DoubleAnimationUsingKeyFrames>
     </Storyboard>
     <Storyboard x:Key="FadeOutStoryboard" FillBehavior="HoldEnd">
       <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="FadeBackground" Storyboard.TargetProperty="Opacity">
-        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.6"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.1"/>
         <SplineDoubleKeyFrame KeyTime="00:00:00.65" Value="0"/>
       </DoubleAnimationUsingKeyFrames>
       <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="Stop" Storyboard.TargetName="FadeBackground" Storyboard.TargetProperty="IsVisible">
@@ -141,6 +147,8 @@ Parameters which have to be accessible by a DynamicResource lookup:
                      IsVisible="{Binding RelativeSource={RelativeSource Self},Path=Template,Converter={StaticResource ReferenceToBoolConverter}}"/>
           </Grid>
 
+		  
+		  
           <!--Overlay to darken the content when the hidden menu is shown-->
           <Grid x:Name="FadeBackground" Background="Black" IsVisible="False"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,-500,-200,-500" Opacity="0">
@@ -152,7 +160,14 @@ Parameters which have to be accessible by a DynamicResource lookup:
             </Grid.Triggers>
           </Grid>
 
-          <Grid x:Name="RightPanel" Margin="50,-230,-730,-300" VerticalAlignment="Stretch"
+  
+	<!--
+		##############################################################################################################################################################################################
+		############################################################################## MAIN GRID FOR SLIDE OUT MENU ##################################################################################
+		##############################################################################################################################################################################################
+	-->  		  
+		  
+          <Grid x:Name="RightPanel" Margin="50,-230,-590,-300" VerticalAlignment="Stretch"
                 Width="645" HorizontalAlignment="Right">
             <Grid.IsVisible>
               <Binding Source="{StaticResource ViewModeModel}" Path="LayoutType"
@@ -163,7 +178,7 @@ Parameters which have to be accessible by a DynamicResource lookup:
                 <StaticResource ResourceKey="FadeInStoryboard"/>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="RightPanel" Storyboard.TargetProperty="RenderTransform.X">
                   <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                  <SplineDoubleKeyFrame KeyTime="00:00:00.65" Value="-600"/>
+                  <SplineDoubleKeyFrame KeyTime="00:00:00.35" Value="-510"/>
                 </DoubleAnimationUsingKeyFrames>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="SlideMenuBackground" Storyboard.TargetProperty="Opacity">
                   <SplineDoubleKeyFrame KeyTime="00:00:00.4" Value="0"/>
@@ -173,8 +188,8 @@ Parameters which have to be accessible by a DynamicResource lookup:
               <Storyboard x:Key="SlideOutStoryboard" FillBehavior="HoldEnd">
                 <StaticResource ResourceKey="FadeOutStoryboard"/>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="RightPanel" Storyboard.TargetProperty="RenderTransform.X">
-                  <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-600"/>
-                  <SplineDoubleKeyFrame KeyTime="00:00:00.65" Value="0"/>
+                  <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-510"/>
+                  <SplineDoubleKeyFrame KeyTime="00:00:00.35" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" FillBehavior="HoldEnd" Storyboard.TargetName="SlideMenuBackground" Storyboard.TargetProperty="Opacity">
                   <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
@@ -213,17 +228,24 @@ Parameters which have to be accessible by a DynamicResource lookup:
               <TranslateTransform X="0"/>
             </Grid.RenderTransform>
 
-            <Border x:Name="SlideMenuBackground" Grid.Row="1" Grid.Column="1" CornerRadius="{ThemeResource DialogBorderCornerRadius}" Opacity="0"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-54,76,-34,257">
-              <Border.Background>
-                <ImageBrush Stretch="Fill" ImageSource="SlideMenuBackground.png"/>
-              </Border.Background>
-            </Border>
-            <Border Grid.Row="1" Grid.Column="1" CornerRadius="{ThemeResource DialogBorderCornerRadius}" Background="Black"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,140,30,328">
+  
+	<!--
+		##############################################################################################################################################################################################
+		############################################################################ PANEL BACKGROUND FOR HIDDEN MENU ################################################################################
+		##############################################################################################################################################################################################
+	-->  
+            <Border Grid.Row="1" Grid.Column="1" CornerRadius="{ThemeResource DialogBorderCornerRadius}" Background="black" Opacity="0.35"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,128,30,308">
             </Border>
 
-            <ListView x:Name="MainListMenu" Grid.Row="1" Grid.Column="1" Style="{ThemeResource PopupMenuListViewStyle}" Margin="30,120,50,345"
+  
+	<!--
+		##############################################################################################################################################################################################
+		############################################################################# LISTVIEW CONTROL FOR HIDDEN MENU ###############################################################################
+		##############################################################################################################################################################################################
+	-->  
+	
+            <ListView x:Name="MainListMenu" Grid.Row="1" Grid.Column="1" Style="{ThemeResource PopupMenuListViewStyle}" Margin="50,120,50,345"
               HorizontalAlignment="Stretch" VerticalAlignment="Center" SetFocusPrio="Default"
               ItemsSource="{Binding Source={StaticResource MenuModel},Path=MenuItems,Mode=OneTime}"
               IsEnabled="{Binding Source={StaticResource MenuModel},Path=IsMenuOpen}">
@@ -231,13 +253,22 @@ Parameters which have to be accessible by a DynamicResource lookup:
                 <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
               </ListView.Resources>
             </ListView>
+		
+	<!--
+		##############################################################################################################################################################################################
+		#################################################################### BUTTON TO SLIDE MENU WHEN MOUSE HOVERS IT ###############################################################################
+		##############################################################################################################################################################################################
+	-->  
+	
             <Button x:Name="MenuShowButton" Content="Menu" Style="{ThemeResource MenuButtonWideStyle}"
                     Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="180" Margin="0,0,0,240"
                     IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}"
                     Command="{Command Source={StaticResource MenuModel}, Path=ToggleMenu}">
-              <Image Source="hiddenmenu_tab.png" Stretch="Uniform" Width="35" Margin="-5,10,-15,-10"/>
+              <Image Source="hiddenmenu_tab.png" Stretch="Uniform" Width="35" Margin="10,10,-95,0" Opacity="0"/>
             </Button>
           </Grid>
+		  
+		  
 
           <Grid x:Name="TopPanel" Margin="0,-45,-130,-1100" VerticalAlignment="Bottom"
               Width="600" Height="1150" HorizontalAlignment="Right">
