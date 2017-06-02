@@ -576,11 +576,17 @@
     </Setter>
   </Style>
 
-  <!-- A simple data template to show the Name of the ListItem in a Label -->
+  
+ 	<!--
+		##############################################################################################################################################################################################
+		################################################################## DEFAULT ITEMDATA TEMPLATE TO SHOW ITEM NAME IN LABEL###################################################################
+		##############################################################################################################################################################################################
+	--> 
+
   <DataTemplate x:Key="DefaultItemDataTemplate" DataType="{x:Type collections:ListItem}">
     <DockPanel x:Name="ItemControl" LastChildFill="False">
       <Label x:Name="ItemLabel" DockPanel.Dock="Center" Content="{Binding [Name]}"
-          HorizontalAlignment="Left" VerticalAlignment="Center"
+          HorizontalAlignment="Center" VerticalAlignment="Center"
           FontSize="{ThemeResource ListFontSize}" Margin="12,0,0,0" Opacity="0.6" Color="{ThemeResource TextColor}"/>
     </DockPanel>
   </DataTemplate>
@@ -588,7 +594,7 @@
   <DataTemplate x:Key="DefaultMenuItemDataTemplate" DataType="{x:Type collections:ListItem}">
     <DockPanel x:Name="ItemControl" LastChildFill="False">
       <Label x:Name="ItemLabel" DockPanel.Dock="Center" Content="{Binding [Name]}"
-          HorizontalAlignment="Left" VerticalAlignment="Center"
+          HorizontalAlignment="Center" VerticalAlignment="Center"
           FontSize="{ThemeResource SmallFontSize}" Color="{ThemeResource TextColor}"
           Opacity="0.6"/>
     </DockPanel>
