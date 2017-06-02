@@ -14,7 +14,7 @@
     <ColumnDefinition Width="*"/>
   </Grid.ColumnDefinitions>
   
-  <Rectangle Fill="Black" Margin="0,-40,-2,-4" Stroke="Black" Opacity="0.35" Grid.Row="0" Grid.Column="0"/>
+  <Rectangle Fill="Black" Margin="0,-40,-32,-4" Stroke="Black" Opacity="0.35" Grid.Row="0" Grid.Column="0"/>
 
   <!-- All KeyBindings are included from shared resource -->
   <Include Source="screens\MediaItemsFilterKeyBindings.inc"/>
@@ -49,7 +49,7 @@
     </Grid.ColumnDefinitions>
 
     <ListView x:Name="MediaItemsList" Style="{ThemeResource MediaItemsListListViewStyle}" ItemsSource="{Binding Items}" RestoreFocus="True"
-        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{Binding ShowList}" Margin="-1,0,-123,0" Grid.Column="1">
+        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{Binding ShowList}" Margin="-1,0,-153,0" Grid.Column="1">
       <ListView.Resources>
         <!--<ResourceWrapper x:Key="VerticalScrollbarRenderTransform">
           <TranslateTransform X="40" />

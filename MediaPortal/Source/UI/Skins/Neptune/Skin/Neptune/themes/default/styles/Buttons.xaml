@@ -546,26 +546,26 @@
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
+              <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
             <Grid.RenderTransform>
               <TransformGroup>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
               </TransformGroup>
             </Grid.RenderTransform>
-            <Rectangle RadiusY="17" RadiusX="17" Stroke="Gray" Opacity="1" StrokeThickness="1.5" IsVisible="{Binding Path=Selected}" Margin="-2" />
-            <Control x:Name="ButtonControlBackground" Style="{ThemeResource PopupMenuButtonControlStyle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Rectangle x:Name="ButtonControlRectanglePopup" 
+                   IsVisible="False"
+                   Fill="{ThemeResource ButtonFillColor}" Stroke="{ThemeResource ButtonStrokeColor}" StrokeThickness="0">
+            </Rectangle>
+            
             <ContentPresenter x:Name="ButtonContentPresenter" Margin="10,5,10,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
           </Grid>
           <ControlTemplate.Triggers>
-            <Trigger Property="HasFocus" Value="True">
+		    <Trigger Property="HasFocus" Value="True">
+              <Setter TargetName="ButtonControlRectanglePopup" Property="IsVisible" Value="True"/>
               <Trigger.EnterActions>
-                <BeginStoryboard x:Name="Focused_BeginStoryboard" Storyboard="{ThemeResource FocusedMenuButtonWideStoryboard}"/>
                 <SoundPlayerAction Source="navigate.wav" DisableOnAudioOutput="True"/>
               </Trigger.EnterActions>
-              <Trigger.ExitActions>
-                <StopStoryboard BeginStoryboardName="Focused_BeginStoryboard"/>
-              </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
               <Trigger.EnterActions>
@@ -649,6 +649,13 @@
       </Setter.Value>
     </Setter>
   </Style>
+  
+  
+	<!--
+		##############################################################################################################################################################################################
+		############################################################################### MEDIA ITEM LISTVIEW BACKGROUND ETC ###########################################################################
+		##############################################################################################################################################################################################
+	-->   
 
   <Style x:Key="MediaItemButtonWideStyle" TargetType="{x:Type Button}">
     <Setter Property="Template">

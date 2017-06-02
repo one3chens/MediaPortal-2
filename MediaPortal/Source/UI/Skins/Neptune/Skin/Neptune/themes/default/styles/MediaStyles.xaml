@@ -372,7 +372,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-		
+<!--
         <Grid.OpacityMask>
           <VisualBrush>
             <VisualBrush.Visual>
@@ -380,6 +380,7 @@
             </VisualBrush.Visual>
           </VisualBrush>
         </Grid.OpacityMask>
+		-->
         <Image x:Name="ItemTypeImage" Stretch="Uniform">
           <Image.Source>
             <fanart:FanArtImageSource fanart:FanArtMediaType="Undefined" fanart:FanArtType="Thumbnail" fanart:FanArtName="{Binding FirstMediaItem.MediaItemId}"

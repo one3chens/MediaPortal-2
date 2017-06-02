@@ -7,12 +7,13 @@
     Source="screens\master_menu.xaml"
     >
   <Include.Resources>
-
+ 
     <!-- Header_Text resource has to be added by including screen -->
-
+ 
     <!-- Contents -->
     <ControlTemplate x:Key="Contents_Template">
-      <Grid>
+      <Grid x:Name="MainContent">
+ 
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -20,27 +21,27 @@
           <ColumnDefinition Width="370"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-		
+ 
         <Control Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,40,0,5">
           <Control.TemplateControl>
             <Include Source="screens\MediaItemsList.inc"/>
           </Control.TemplateControl>
         </Control>
-
+ 
         <Control Grid.Column="0" VerticalAlignment="Stretch" MinWidth="{DynamicResource Poster_Width}" Width="340" Margin="10,-2,30,0"
-          Template="{Binding Source={DynamicResource Media_Details_Template}}">
+         Template="{Binding Source={DynamicResource Media_Details_Template}}">
         </Control>
       </Grid>
     </ControlTemplate>
-
+ 
     <!-- Control template for the MediaItem details (cover, thumbs, duration, genres...)-->
     <ControlTemplate x:Key="Media_Details_Template">
       <Include Source="screens\MediaItemFanArt.inc"/>
     </ControlTemplate>
-
+ 
     <ControlTemplate x:Key="Alternative_Footer_Template">
       <Include Source="screens\MultiDetails.inc"/>
     </ControlTemplate>
-
+ 
   </Include.Resources>
 </Include>

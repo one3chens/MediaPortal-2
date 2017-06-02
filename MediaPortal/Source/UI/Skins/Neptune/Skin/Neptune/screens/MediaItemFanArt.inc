@@ -17,6 +17,7 @@
     <RowDefinition Height="*"/>
   </Grid.RowDefinitions>
 
+  <Rectangle Fill="Black" Margin="1,-8,1,-19" Stroke="Black" Opacity="0.35" Grid.Row="0" Grid.Column="0"/>
   <Image x:Name="thumb" VerticalAlignment="Stretch" Stretch="UniformToFill" Margin="0,-10,0,-20">
     <Image.Source>
       <ImageSourceWrapper Delay="0" DelayInOut="true" Transition="transitions\dissolve" TransitionDuration="0"
