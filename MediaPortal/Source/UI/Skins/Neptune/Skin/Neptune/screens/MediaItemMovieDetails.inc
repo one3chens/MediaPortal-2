@@ -80,7 +80,7 @@
     ################################### OTHER ITEM DETAILS LIKE RATING AND RUNTIME IN STACK PANEL ##########################################
 	########################################################################################################################################
     -->	
-  <!-- OTHER ITEM DETAILS LIKE RATING AND RUNTIME -->
+
   <Grid Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">
     <Grid.ColumnDefinitions>
     <ColumnDefinition Width="*"/>

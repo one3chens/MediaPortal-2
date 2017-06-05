@@ -28,7 +28,7 @@
     -->
   <ControlTemplate x:Key="List_WatchedFlag_Template">
     <Grid>
-      <Image x:Name="PartlyWatchedLabel" Height="25" Margin="0,5,5,0" Stretch="Uniform" Opacity="0.7"
+      <Image x:Name="PartlyWatchedLabel" Height="25" Margin="0,0,5,0" Stretch="Uniform" Opacity="0.7"
                Source="partlywatched.png">
         <Image.IsVisible>
           <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} == 0 &amp;&amp; {1} > 1">
@@ -51,7 +51,7 @@
 	########################################################################################################################################
     -->
 	
-      <Image x:Name="WatchedLabel" Height="25" Margin="0,0,5,0" Stretch="Uniform" Opacity="0.7"
+      <Image x:Name="WatchedLabel" Height="25" Margin="0,2,5,2" Stretch="Uniform" Opacity="0.7"
                Source="watched.png">
         <Image.IsVisible>
           <Binding Path="PlayCount" Converter="{StaticResource ExpressionValueConverter}" ConverterParameter="{}{0} > 0"/>
@@ -66,6 +66,8 @@
       </Image>
     </Grid>
   </ControlTemplate>
+  
+ 
 
   <ControlTemplate x:Key="Cover_WatchedFlag_Template">
     <Grid>
@@ -931,13 +933,16 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto"/>
+		<ColumnDefinition Width="Auto"/>
+		<ColumnDefinition Width="100"/>
+        <ColumnDefinition Width="100"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 	  
-      <Label x:Name="ItemLabel" Grid.Column="1" Content="{Binding SimpleTitle}" FontSize="{ThemeResource ListFontSize}"
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( LABEL ) --> 
+      <Label x:Name="ItemLabel" Grid.Column="1" Content="{Binding MovieName}" FontSize="{ThemeResource ListFontSize}"
              Color="{ThemeResource TextColor}" FontFamily="DefaultBold" Margin="8,0,0,0">
         <Label.Opacity>
           <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
@@ -947,7 +952,69 @@
           </MultiBinding>
         </Label.Opacity>
       </Label>
-      <Control Grid.Row="0" Grid.Column="2" Margin="0,0,0,0" Template="{StaticResource List_WatchedFlag_Template}"/>
+	  
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( WATCHED FLAG ) --> 
+      <Control Grid.Row="0" Grid.Column="2" Margin="0,8,0,2" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource List_WatchedFlag_Template}"/>
+      
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( RESOLUTION ) --> 
+             <media:VideoStreamAspectWrapper AspectIndex="0" MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="3" Margin="20,16,0,13">
+                  <media:VideoStreamAspectWrapper.Template>
+                     <ControlTemplate>	  
+                          <Image HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform" DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                            <Image.Source>
+                              <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} &lt; 700 ? {1} : ({0} &lt; 2000 ? {2} : ({0} &lt; 3000 ? {3} : {4}))">
+                                <Binding Path="AspectHeight"/>
+                                <Binding Source="Medialogos\resolution\sd.png"/>
+                                <Binding Source="Medialogos\resolution\hd.png"/>
+                                <Binding Source="Medialogos\resolution\2k.png"/>
+                                <Binding Source="Medialogos\resolution\4k.png"/>
+                              </MultiBinding>
+                            </Image.Source>
+							<Image.Opacity>
+							  <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+								<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+								<Binding Source="1.0"/>
+								<Binding Source="0.6"/>
+					          </MultiBinding>
+							</Image.Opacity>
+                          </Image>
+						</ControlTemplate> 
+	                  </media:VideoStreamAspectWrapper.Template>
+					</media:VideoStreamAspectWrapper>  
+
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( RATING ) --> 
+	  <media:MovieAspectWrapper MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="4" Margin="20,0,0,0">
+        <media:MovieAspectWrapper.Template>
+          <ControlTemplate>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+              <Image Source="Star.png">
+			    <Image.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.0"/>
+						<Binding Source="0.6"/>
+					</MultiBinding>
+				</Image.Opacity>
+		      </Image>
+              <Label x:Name="RatingCountLabel" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=TotalRating,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="15,0,5,0">
+                <Label.Content>
+                  <Binding Path="TotalRating" Converter="{StaticResource StringFormatConverter}" ConverterParameter="{}{0:F1}"/>
+                </Label.Content>
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+            </StackPanel>
+          </ControlTemplate>
+        </media:MovieAspectWrapper.Template>
+      </media:MovieAspectWrapper>	
 
       <Image x:Name="ItemTypeSmall" Stretch="Uniform" Margin="10,2,0,2"
              Width="{StaticResource MEDIA_THUMB_WIDTH_S}" Height="{StaticResource MEDIA_THUMB_HEIGHT_S}">

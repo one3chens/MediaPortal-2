@@ -677,6 +677,7 @@
                       IsVisible="False"
                       Fill="{ThemeResource ButtonFillColor}" Stroke="{ThemeResource ButtonStrokeColor}" StrokeThickness="0">
             </Rectangle>
+			
             <ContentPresenter x:Name="ButtonContentPresenter" Margin="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
           </Grid>
           <ControlTemplate.Triggers>
@@ -830,13 +831,17 @@
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
               </TransformGroup>
             </Grid.RenderTransform>
+            <Rectangle x:Name="CoverButtonControlRectangle" 
+                      IsVisible="False"
+                      Fill="white" Stroke="{ThemeResource ButtonStrokeColor}" StrokeThickness="0">
+            </Rectangle>			
             <ContentPresenter x:Name="ButtonContentPresenter" Margin="3,6,3.5,6.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <Control x:Name="ButtonControlBackground" Style="{ThemeResource MediaItemButtonCoverFlowControlStyle}" 
                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger Property="HasFocus" Value="True">
-              <Setter TargetName="ButtonControlRectangle" Property="IsVisible" Value="True"/>
+              <Setter TargetName="CoverButtonControlRectangle" Property="IsVisible" Value="True"/>
               <Trigger.EnterActions>
                 <!--<BeginStoryboard x:Name="Focused_BeginStoryboard" Storyboard="{ThemeResource FocusedMediaStoryboard_GrowOnly}"/>-->
                 <SoundPlayerAction Source="navigate.wav" DisableOnAudioOutput="True"/>

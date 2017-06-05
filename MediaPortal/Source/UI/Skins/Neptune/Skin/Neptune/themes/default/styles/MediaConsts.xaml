@@ -12,8 +12,8 @@
   <ResourceWrapper x:Key="MEDIA_THUMB_WIDTH" Resource="246"/>
   <ResourceWrapper x:Key="MEDIA_THUMB_HEIGHT" Resource="175"/>
 
-  <ResourceWrapper x:Key="MEDIA_BANNER_WIDTH" Resource="380"/>
-  <ResourceWrapper x:Key="MEDIA_BANNER_HEIGHT" Resource="82"/>  
+  <ResourceWrapper x:Key="MEDIA_BANNER_WIDTH" Resource="440"/>
+  <ResourceWrapper x:Key="MEDIA_BANNER_HEIGHT" Resource="90"/>  
   
   <ResourceWrapper x:Key="MEDIA_POSTER_WIDTH" Resource="135"/>
   <ResourceWrapper x:Key="MEDIA_POSTER_HEIGHT" Resource="192"/>
