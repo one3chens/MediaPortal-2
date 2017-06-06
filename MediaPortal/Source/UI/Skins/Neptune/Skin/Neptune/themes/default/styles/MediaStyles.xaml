@@ -419,21 +419,87 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="100"/>
+        <ColumnDefinition Width="130"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-      <Label x:Name="ItemLabel" Grid.Row="0" Grid.Column="1" Content="{Binding SimpleTitle}" FontSize="{ThemeResource ListFontSize}" Color="{ThemeResource TextColor}" FontFamily="DefaultBold">
-        <Label.Opacity>
-          <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
-            <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
-            <Binding Source="1.3"/>
-            <Binding Source="0.7"/>
-          </MultiBinding>
-        </Label.Opacity>
-      </Label>
+	  
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( LABEL ) --> 
+	  <media:SeriesAspectWrapper MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+        <media:SeriesAspectWrapper.Template>
+		<ControlTemplate>
+		<Label x:Name="ItemLabel1" Content="{Binding SeriesName}" FontSize="{ThemeResource ListFontSize}"
+		     DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+             Color="{ThemeResource TextColor}" FontFamily="DefaultBold" Margin="0,0,0,0">
+			<Label.Opacity>
+			<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+				<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+				<Binding Source="1.3"/>
+				<Binding Source="0.7"/>
+			</MultiBinding>
+			</Label.Opacity>
+		</Label>	  
+		</ControlTemplate>
+	    </media:SeriesAspectWrapper.Template>
+      </media:SeriesAspectWrapper>	
+	  
       <Control Grid.Row="0" Grid.Column="2" Template="{StaticResource List_WatchedFlag_Template}"/>
+	  
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( RATING ) --> 
+	  <media:SeriesAspectWrapper MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="3" Margin="20,0,0,0">
+        <media:SeriesAspectWrapper.Template>
+          <ControlTemplate>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+
+              <Label x:Name="SeasonEPLabel" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     IsVisible="{Binding Path=AvailSeasons,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="15,0,5,0">
+                <Label.Content>
+                  <Binding Path="AvailSeasons"/>
+                </Label.Content>
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+			  <Label x:Name="sepa" Content="|" HorizontalAlignment="Center" VerticalAlignment="Center"
+					 IsVisible="{Binding Path=AvailEpisodes,Converter={StaticResource ReferenceToBoolConverter}}"
+					 Color="{ThemeResource TextColor}" FontSize="{ThemeResource DateTimeFontSize}" Margin="15,0,5,0">
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>	 
+			  <Label x:Name="EpisodeEPLabel" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     IsVisible="{Binding Path=AvailEpisodes,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="15,0,5,0">
+                <Label.Content>
+                  <Binding Path="AvailEpisodes"/>
+                </Label.Content>
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+            </StackPanel>
+          </ControlTemplate>
+        </media:SeriesAspectWrapper.Template>
+      </media:SeriesAspectWrapper>	
+
+
+	  
       <Image x:Name="ItemTypeSmall" Stretch="Uniform" Margin="10,2,0,2"
              Width="{StaticResource MEDIA_THUMB_WIDTH_S}" Height="{StaticResource MEDIA_THUMB_HEIGHT_S}">
         <Image.Source>
@@ -701,20 +767,19 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="100"/>
+		<ColumnDefinition Width="130"/>
+		<ColumnDefinition Width="110"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 
       <Label x:Name="ItemLabel" Grid.Row="0" Grid.Column="1" FontSize="{ThemeResource ListFontSize}" Color="{ThemeResource TextColor}"
+	         Margin="8,0,0,0"
              FontFamily="DefaultBold">
         <Label.Content>
-          <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} + {1} + {2}">
-            <Binding Path="EpisodeNumber"/>
-            <Binding Source=" - "/>
             <Binding Path="EpisodeName"/>
-          </MultiBinding>
         </Label.Content>
         <Label.Opacity>
           <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
@@ -725,6 +790,97 @@
         </Label.Opacity>
       </Label>
       <Control Grid.Row="0" Grid.Column="2" Template="{StaticResource List_WatchedFlag_Template}"/>
+	  
+	  <!-- ADDITIONAL ITEMS ON LISTVIEW ( RATING ) --> 
+	  <media:EpisodeAspectWrapper MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="4" Margin="20,0,0,0">
+        <media:EpisodeAspectWrapper.Template>
+          <ControlTemplate>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+              <Image Source="Star.png">
+			    <Image.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.0"/>
+						<Binding Source="0.6"/>
+					</MultiBinding>
+				</Image.Opacity>
+		      </Image>
+              <Label x:Name="RatingCountLabel" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=TotalRating,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="15,0,5,0">
+                <Label.Content>
+                  <Binding Path="TotalRating" Converter="{StaticResource StringFormatConverter}" ConverterParameter="{}{0:F1}"/>
+                </Label.Content>
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+            </StackPanel>
+          </ControlTemplate>
+        </media:EpisodeAspectWrapper.Template>
+      </media:EpisodeAspectWrapper>	
+
+      <!-- ADDITIONAL ITEMS ON LISTVIEW ( S0E0 ) --> 
+	  <media:EpisodeAspectWrapper MediaItem="{Binding MediaItem}" Grid.Row="0" Grid.Column="3" Margin="20,0,0,0">
+        <media:EpisodeAspectWrapper.Template>
+          <ControlTemplate>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+              <Label x:Name="Ep1" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=Season,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="15,0,0,0" Content="S">
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+			  <Label x:Name="Ep2" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=Season,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="0,0,0,0" Content="{Binding Path=Season}">
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+			  <Label x:Name="Ep3" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=Episode,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="0,0,0,0" Content="E">
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+			  <Label x:Name="Ep4" Color="{ThemeResource TextColor}" Opacity="0.6" VerticalAlignment="Center"
+                     IsVisible="{Binding Path=Episode,Converter={StaticResource ReferenceToBoolConverter}}"
+                     FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold" Margin="0,0,15,0" Content="{Binding Path=Episode}">
+				<Label.Opacity>
+					<MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0} ? {1} : {2}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}" Path="HasFocus"/>
+						<Binding Source="1.3"/>
+						<Binding Source="0.7"/>
+					</MultiBinding>
+				</Label.Opacity>
+              </Label>
+            </StackPanel>
+          </ControlTemplate>
+        </media:EpisodeAspectWrapper.Template>
+      </media:EpisodeAspectWrapper>		  
+	  
+	  
 
       <Image x:Name="ItemTypeSmall" Stretch="Uniform" Margin="10,2,0,2" Source="{Binding MediaItem}"
              Width="{StaticResource MEDIA_THUMB_WIDTH_S}" Height="{StaticResource MEDIA_THUMB_HEIGHT_S}">

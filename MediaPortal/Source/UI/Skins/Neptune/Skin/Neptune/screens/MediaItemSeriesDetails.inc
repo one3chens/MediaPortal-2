@@ -37,7 +37,7 @@
   </Image>
   <Image Source="FanartOverlay.png" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="-50,-30,-5,-96"/>  
   
-  <!-- MOVIE NAME -->
+  <!-- SERIES NAME -->
   <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,-10,-150,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
   <StackPanel Orientation="Horizontal">
   <media:SeriesAspectWrapper MediaItem="{Binding Source={StaticResource FanArtBackgroundModel},Path=MediaItem}">
@@ -64,7 +64,7 @@
   </StackPanel>
   
   
-   <!-- MOVIE DESCRIPTION -->
+   <!-- SERIES DESCRIPTION -->
   
   <media:SeriesAspectWrapper MediaItem="{Binding Source={StaticResource FanArtBackgroundModel},Path=MediaItem}" Grid.Column="0" Grid.Row="1">
     <media:SeriesAspectWrapper.Template>
@@ -91,15 +91,6 @@
     ################################### OTHER ITEM DETAILS LIKE RATING AND RUNTIME IN STACK PANEL ##########################################
 	########################################################################################################################################
     -->	
-
-  <Grid Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">
-    <Grid.ColumnDefinitions>
-    <ColumnDefinition Width="*"/>
-  </Grid.ColumnDefinitions>
-           
-		
-  
-  
   
     <!-- 
 	########################################################################################################################################
@@ -107,44 +98,17 @@
 	########################################################################################################################################
     -->
 	
-  <Grid Grid.Column="0">
-		<Grid.RowDefinitions>
-		<RowDefinition Height="*"/>
-	</Grid.RowDefinitions>
-	<Grid.ColumnDefinitions>
-		<ColumnDefinition Width="210"/>
-		<ColumnDefinition Width="220"/>
-	</Grid.ColumnDefinitions>
-	
-	 <!-- Rounded mask (stretches to fill Grid) -->
-            <Border
-                Name="mask"
-                Background="White"
-                CornerRadius="18"
-				Opacity="0.25"
-            />
-	 <!-- Rounded mask (stretches to fill Grid) -->
-            <Border Grid.Column="1"
-                Name="mask"
-                Background="White"
-                CornerRadius="18"
-				Opacity="0.25"
-            />
-  
                 
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" DataContext="{Binding Source={StaticResource FanArtBackgroundModel},Path=SelectedItem}">
-        <Label Content="{Binding Seasons}" Margin="0,-4,8,0" Color="{ThemeResource TextColor}" Opacity="0.6"/>
-        <Label Content="[Media.SeasonItemsHeader]" Margin="0,-4,0,0" Color="{ThemeResource TextColor}" Opacity="0.6"
-               IsVisible="{Binding Path=Seasons,Converter={StaticResource ReferenceToBoolConverter}}"/>
-      </StackPanel>
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" DataContext="{Binding Source={StaticResource FanArtBackgroundModel},Path=SelectedItem}">
-        <Label Content="{Binding Episodes}" Margin="0,-4,8,0" Color="{ThemeResource TextColor}" Opacity="0.6"/>
-        <Label Content="[Media.EpisodeItemsHeader]" Margin="0,-4,0,0" Color="{ThemeResource TextColor}" Opacity="0.6"
-               IsVisible="{Binding Path=Episodes,Converter={StaticResource ReferenceToBoolConverter}}"/>
-      </StackPanel>
-    </Grid>
-
-  </Grid>	
+	  <media:SeriesAspectWrapper MediaItem="{Binding Source={StaticResource FanArtBackgroundModel},Path=MediaItem}" Grid.Row="2" Grid.Column="0" Margin="12,0,0,-5">
+        <media:SeriesAspectWrapper.Template>
+		<ControlTemplate>
+		<Label x:Name="NextAirDate" Content="{Binding Actors}" TextTrimming="WordEllipsis" FontSize="{ThemeResource ListFontSize}"
+		     DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+             Color="{ThemeResource TextColor}" FontFamily="Default" Margin="0,0,0,0" Opacity="0.6">
+		</Label>	  
+		</ControlTemplate>
+	    </media:SeriesAspectWrapper.Template>
+      </media:SeriesAspectWrapper>	
 
   
   
