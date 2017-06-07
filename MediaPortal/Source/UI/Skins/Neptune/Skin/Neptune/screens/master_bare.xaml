@@ -151,6 +151,11 @@ Parameters which have to be accessible by a DynamicResource lookup:
           </StackPanel>
         </StackPanel>
       </StackPanel>
+	  <!--
+	  <Control x:Name="HeaderControl" Grid.Row="0" Grid.Column="1" Margin="0,0,10,150" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+               Template="{DynamicResource ResourceKey=Header_Text_Template}">
+      </Control>
+	  -->
     </Grid>
     
     
@@ -186,9 +191,7 @@ Parameters which have to be accessible by a DynamicResource lookup:
         </Button.Triggers>
       </Button>
 
-      <Control x:Name="HeaderControl" Grid.Row="0" Grid.Column="0" Margin="145,-5,0,0" VerticalAlignment="Top"
-               Template="{DynamicResource ResourceKey=Header_Text_Template}">
-      </Control>
+
 
       <!-- Main Menu Group tabs -->
       <bvm:GroupMenuListView x:Name="GroupList" Style="{ThemeResource HomeGroupListViewStyle}" Grid.Row="0" Grid.Column="1"
@@ -205,11 +208,11 @@ Parameters which have to be accessible by a DynamicResource lookup:
 
 
       <!-- Menu button -->
-      <Control Grid.Row="0" Grid.Column="3" Margin="15,0,0,0" VerticalAlignment="Center"
+      <Control Grid.Row="0" Grid.Column="3" Margin="0,0,0,0" VerticalAlignment="Center"
                x:Name="MenuButtonDummy" Template="{DynamicResource ResourceKey=Menu_Button_Dummy}"></Control>
-      <Control Grid.Row="0" Grid.Column="3" Margin="15,0,0,0" VerticalAlignment="Center"
+      <Control Grid.Row="0" Grid.Column="3" Margin="0,0,0,0" VerticalAlignment="Center"
                x:Name="MenuButtonDummyConfig" Template="{DynamicResource ResourceKey=Menu_Button_DummyConfig}"></Control>
-      <Control Grid.Row="0" Grid.Column="3" Margin="15,0,0,0" VerticalAlignment="Center"
+      <Control Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"
                x:Name="MenuButtonPlaceholder" Template="{DynamicResource ResourceKey=Menu_Button_Placeholder}"></Control>
 
     </Grid>

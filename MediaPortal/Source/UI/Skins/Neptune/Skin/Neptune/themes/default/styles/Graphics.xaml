@@ -103,9 +103,9 @@
   </ControlTemplate>
 
   <ControlTemplate x:Key="MenuControlTemplate">
-    <Grid Width="81" Height="80" Margin="-25">
+    <Grid Width="64" Height="64" Margin="-10">
       <Image Source="Menu_button.png"
-             VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Opacity="1" />
+             VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Opacity="0.6" />
     </Grid>
   </ControlTemplate>
 

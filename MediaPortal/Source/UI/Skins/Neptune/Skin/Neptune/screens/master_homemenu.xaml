@@ -19,7 +19,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="Menu_Button_Dummy">
-      <Button x:Name="MenuButton" Style="{ThemeResource MenuButtonStyle}"
+      <Button x:Name="MenuButton" Style="{ThemeResource MenuButtonStyle}" Margin="32,0,0,-20"
               HorizontalAlignment="Right" VerticalAlignment="Center"
               IsEnabled="False">
       </Button>
