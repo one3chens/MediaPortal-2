@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary
+    xmlns="www.team-mediaportal.com/2008/mpf/directx"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System"
+    xmlns:collections="clr-namespace:MediaPortal.UI.Presentation.DataObjects;assembly=MediaPortal.UI"
+    xmlns:fanart="clr-namespace:MediaPortal.Extensions.UserServices.FanArtService.Client;assembly=FanArtService.Client"
+    xmlns:neptune="clr-namespace:MediaPortal.UiComponents.Neptune.Models.HomeItems;assembly=Neptune"
+    xmlns:controls="clr-namespace:MediaPortal.UiComponents.Neptune.Controls;assembly=Neptune"
+    xmlns:media="clr-namespace:MediaPortal.UiComponents.Media.Models.Navigation;assembly=Media"
+    DependsOnStyleResources="OtherControls,MediaConsts,Colors,Buttons,Consts"
+    >
+
+  <!--
+  The dimensions of a tile group.
+  A tile group is a collection of tiles arranged in different layouts.
+  Every tile group has to have the same dimensions because the underlying ListView uses virtualization
+  to save memory and improve performance. Each tile group is a single virtualized item
+  and virtualization requires that each item has the same dimensions.
+  -->
+  <ResourceWrapper x:Key="TileGroupWidth" Resource="800" />
+  <ResourceWrapper x:Key="TileGroupHeight" Resource="700" />
+  
+  <!--The margin around each tile-->
+  <ResourceWrapper x:Key="TileMargin" Resource="5" />
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## PLUGIN TILE TEMPLATES #####################################################################################################
+		##############################################################################################################################################################################################
+	-->
+  
+  <!--Template for a square plugin tile-->
+  
+  <ControlTemplate x:Key="PluginTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"
+               Source="{Binding Converter={StaticResource ListItemActionIdConverter}, ConverterParameter=.jpg}"/>
+
+      <!-- Darkened band -->
+      <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+      <!-- Item label -->
+      <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding [Name]}"
+               FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+    </Grid>
+  </ControlTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## MOVIE TILE TEMPLATES ###################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <!--Template for a movie poster-->
+  
+  <ControlTemplate x:Key="MoviePosterTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
+        <Image.Source>
+          <fanart:FanArtImageSource fanart:FanArtMediaType="Movie" fanart:FanArtType="Poster" fanart:FanArtName="{Binding Source={Binding MediaItem}, Path=MediaItemId}"
+               fanart:MaxWidth="{StaticResource MEDIA_COVER_WIDTH}" fanart:MaxHeight="{StaticResource MEDIA_COVER_HEIGHT}"/>
+        </Image.Source>
+      </Image>
+
+      <!-- Darkened band -->
+      <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+      <!-- Item label -->
+      <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding SimpleTitle}"
+               FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+    </Grid>
+  </ControlTemplate>
+
+  <!--Template for a movie banner-->
+  
+  <ControlTemplate x:Key="MovieBannerTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
+        <Image.Source>
+          <fanart:FanArtImageSource fanart:FanArtMediaType="Movie" fanart:FanArtType="Banner" fanart:FanArtName="{Binding Source={Binding MediaItem}, Path=MediaItemId}"
+               fanart:MaxWidth="{StaticResource MEDIA_BANNER_WIDTH}" fanart:MaxHeight="{StaticResource MEDIA_BANNER_HEIGHT}"/>
+        </Image.Source>
+      </Image>
+
+    </Grid>
+  </ControlTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## SERIES TILE TEMPLATES #####################################################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <!--Template for a series poster-->
+  
+  <ControlTemplate x:Key="SeriesPosterTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
+        <Image.Source>
+          <fanart:FanArtImageSource fanart:FanArtMediaType="Episode" fanart:FanArtType="Poster" fanart:FanArtName="{Binding Source={Binding MediaItem}, Path=MediaItemId}"
+               fanart:MaxWidth="{StaticResource MEDIA_COVER_WIDTH}" fanart:MaxHeight="{StaticResource MEDIA_COVER_HEIGHT}"/>
+        </Image.Source>
+      </Image>
+
+      <!-- Darkened band -->
+      <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+      <!-- Item label -->
+      <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Series}"
+               FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+    </Grid>
+  </ControlTemplate>
+
+  <!--Template for a series banner-->
+  
+  <ControlTemplate x:Key="SeriesBannerTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
+        <Image.Source>
+          <fanart:FanArtImageSource fanart:FanArtMediaType="Episode" fanart:FanArtType="Banner" fanart:FanArtName="{Binding Source={Binding MediaItem}, Path=MediaItemId}"
+               fanart:MaxWidth="{StaticResource MEDIA_BANNER_WIDTH}" fanart:MaxHeight="{StaticResource MEDIA_BANNER_HEIGHT}"/>
+        </Image.Source>
+      </Image>
+
+    </Grid>
+  </ControlTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## AUDIO TILE TEMPLATES ###################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <!--Template for an album cover-->
+  
+  <ControlTemplate x:Key="AudioCoverTileTemplate">
+    <Grid x:Name="ItemControl">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+      </Grid.RowDefinitions>
+
+      <!-- Light blue background fill -->
+      <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+      <!-- Image -->
+      <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill"
+               Source="{Binding MediaItem}"/>
+
+      <!-- Darkened band -->
+      <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+      <!-- Item label -->
+      <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Album}"
+               FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+    </Grid>
+  </ControlTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## TILE CONTAINER TEMPLATES ##################################################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <!--Template to use for the button that contains the tile content-->
+
+  <ControlTemplate x:Key="TileButtonTemplate">
+    <Button Style="{ThemeResource HomeButtonStyle}" Margin="{ThemeResource TileMargin}"
+            Content="{Binding Item}"
+            Command="{DynamicResource Menu_Command}">
+      <Button.Triggers>
+        <Trigger Property="HasFocus" Value="True">
+          <Trigger.EnterActions>
+            <TriggerCommand Command="{DynamicResource Menu_Focus_Command}"/>
+          </Trigger.EnterActions>
+        </Trigger>
+      </Button.Triggers>
+    </Button>
+  </ControlTemplate>
+  
+  <!--
+  Base Template for all square tiles, the template automatically chooses
+  the correct DataTemplate from ControlTemplate.Resources based on the DataType
+  -->
+  <ControlTemplate x:Key="UniformTileContainerTemplate">
+    <ControlTemplate.Resources>
+      
+      <!--Square plugin tile-->
+      <DataTemplate DataType="{x:Type collections:ListItem}">
+        <Control Template="{ThemeResource PluginTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+
+      <!--Square audio cover tile-->
+      <DataTemplate DataType="{x:Type media:AudioItem}">
+        <Control Template="{ThemeResource AudioCoverTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+      
+      <!--Add other square tile templates here-->
+
+    </ControlTemplate.Resources>
+
+    <!--Actual container for the tile that displays the DataTemplate-->
+    <Control Template="{ThemeResource TileButtonTemplate}" />
+
+  </ControlTemplate>
+
+  <!--
+  Base Template for all poster tiles, the Button automatically chooses
+  the correct DataTemplate from ControlTemplate.Resources based on the DataType
+  -->
+  <ControlTemplate x:Key="PosterTileContainerTemplate">
+    <ControlTemplate.Resources>
+
+      <!--Movie poster tile-->
+      <DataTemplate DataType="{x:Type media:MovieItem}">
+        <Control Template="{ThemeResource MoviePosterTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+
+      <!--Series poster tile-->
+      <DataTemplate DataType="{x:Type media:EpisodeItem}">
+        <Control Template="{ThemeResource SeriesPosterTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+
+      <!--Add other poster tile templates here-->
+      
+    </ControlTemplate.Resources>
+
+    <!--Actual container for the tile that displays the DataTemplate-->
+    <Control Template="{ThemeResource TileButtonTemplate}" />
+    
+  </ControlTemplate>
+
+  <!--
+  Base Template for all banner tiles, the Button automatically chooses
+  the correct DataTemplate from ControlTemplate.Resources based on the DataType
+  -->
+  <ControlTemplate x:Key="BannerTileContainerTemplate">
+    <ControlTemplate.Resources>
+
+      <!--Movie banner tile-->
+      <DataTemplate DataType="{x:Type media:MovieItem}">
+        <Control Template="{ThemeResource MovieBannerTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+
+      <!--Series banner tile-->
+      <DataTemplate DataType="{x:Type media:EpisodeItem}">
+        <Control Template="{ThemeResource SeriesBannerTileTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+      </DataTemplate>
+
+      <!--Add other banner tile templates here-->
+
+    </ControlTemplate.Resources>
+
+    <!--Actual container for the tile that displays the DataTemplate-->
+    <Control Template="{ThemeResource TileButtonTemplate}" />
+
+  </ControlTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## TILE GROUP TEMPLATES ######################################################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <!--Displays four square tiles-->
+  <DataTemplate DataType="{x:Type neptune:UniformTileGroup}">
+    <Grid Width="{ThemeResource TileGroupWidth}" Height="{ThemeResource TileGroupHeight}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <Control Grid.Column="0" Grid.Row="0"
+               Template="{ThemeResource UniformTileContainerTemplate}"
+               DataContext="{Binding Items[0]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="0" Grid.Row="1"
+               Template="{ThemeResource UniformTileContainerTemplate}"
+               DataContext="{Binding Items[1]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="1" Grid.Row="0"
+               Template="{ThemeResource UniformTileContainerTemplate}"
+               DataContext="{Binding Items[2]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="1" Grid.Row="1"
+               Template="{ThemeResource UniformTileContainerTemplate}"
+               DataContext="{Binding Items[3]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+    </Grid>
+  </DataTemplate>
+
+  <!--Displays 3 poster tiles above a banner tile-->
+  <DataTemplate DataType="{x:Type neptune:PosterBannerGroup}">
+    <Grid Width="{ThemeResource TileGroupWidth}" Height="{ThemeResource TileGroupHeight}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="2*"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <Control Grid.Column="0" Grid.Row="0"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[0]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="1" Grid.Row="0"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[1]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="2" Grid.Row="0"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[2]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+               Template="{ThemeResource BannerTileContainerTemplate}"
+               DataContext="{Binding Items[3]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+    </Grid>
+  </DataTemplate>
+
+  <!--Displays 2 large poster tiles-->
+  <DataTemplate DataType="{x:Type neptune:PosterGroup}">
+    <Grid Width="{ThemeResource TileGroupWidth}" Height="{ThemeResource TileGroupHeight}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <Control Grid.Column="0"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[0]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="1"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[1]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+    </Grid>
+  </DataTemplate>
+
+  <!--
+		##############################################################################################################################################################################################
+		################################################################## MAIN HOME TIMELINE ########################################################################################################
+		##############################################################################################################################################################################################
+	-->
+
+  <Style x:Key="HomeTimelineListViewStyle" BasedOn="{ThemeResource DefaultListViewStyle}" TargetType="{x:Type ListView}">
+
+    <!-- Don't inherit the ItemTemplate from DefaultListViewStyle - It should remain null to make the SkinEngine choose an appropriate template -->
+    <Setter Property="ItemTemplate"/>
+
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ListView}">
+          <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <ItemsPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+          </ScrollViewer>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+
+          <!--
+          NeptuneTimelineControl is a custom AnimatedStackPanel that can handle scrolling
+          to an individual subitem (tile) of the main list item (tile group)
+          -->
+          <controls:NeptuneTimelineControl x:Name="ListItemsHost" Orientation="Horizontal" ScrollMargin="900,0" IsItemsHost="True">
+            <controls:NeptuneTimelineControl.Triggers>
+              
+              <EventTrigger RoutedEvent="AnimatedStackPanel.Scroll">
+                <EventTrigger.Actions>
+                  <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                      <!--The animation to use when scrolling-->
+                      <Storyboard FillBehavior="HoldEnd">
+                        <DoubleAnimation BeginTime="00:00:00" From="0" To="1" Duration="00:00:00.300" FillBehavior="HoldEnd"
+                                         Storyboard.TargetName="ListItemsHost" Storyboard.TargetProperty="ScrollOffsetMultiplier"/>
+                      </Storyboard>                      
+                    </BeginStoryboard.Storyboard>
+                  </BeginStoryboard>
+                </EventTrigger.Actions>
+              </EventTrigger>
+              
+            </controls:NeptuneTimelineControl.Triggers>
+          </controls:NeptuneTimelineControl>
+          
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  
+</ResourceDictionary>

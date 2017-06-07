@@ -24,9 +24,11 @@
     <PluginReference PluginId="{B765A4B6-F455-4941-BDAE-2CE45208BFEB}" CompatibleAPI="1"/> <!-- Configuration plugin -->
     <PluginReference PluginId="{E5326D7C-698F-48C2-AA15-AD6CCBD1A96F}" CompatibleAPI="2"/> <!-- SystemStateMenu plugin -->
     <PluginReference PluginId="{B4D6171B-81CB-4813-ACBE-FD3133ADC504}" CompatibleAPI="1"/> <!-- SkinSettings plugin -->
+    <PluginReference PluginId="{15FD97A4-D925-4D8A-9DF0-5349743EED0C}" CompatibleAPI="2"/> <!-- FanArt Service Client plugin -->
   </DependsOn>
 
   <Register Location="/Models">
+    <Model Id="F3CF9C2A-5B95-49A5-98DA-12328692AA18" Name="NeptuneHomeModel" ClassName="MediaPortal.UiComponents.Neptune.Models.NeptuneHomeModel"/>
     <Model Id="274A6765-ECAF-4BCF-AB97-E6DCD67CE3E2" Name="HomeMenuModel" ClassName="MediaPortal.UiComponents.Neptune.Models.HomeMenuModel"/>
     <Model Id="2DA7A198-D158-4A74-B8C4-0D75CC863CE3" Name="LatestMediaModel" ClassName="MediaPortal.UiComponents.Neptune.Models.LatestMediaModel"/>
     <Model Id="7E252D7F-0ACD-46D1-9BCE-436B12110537" Name="SetupModel" ClassName="MediaPortal.UiComponents.Neptune.Models.SetupModel"/>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include
+    xmlns="www.team-mediaportal.com/2008/mpf/directx"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Source="screens\master_bare.xaml"
+    xmlns:mp_special_controls="clr-namespace:MediaPortal.UI.SkinEngine.SpecialElements.Controls;assembly=SkinEngine"
+    xmlns:bv="clr-namespace:MediaPortal.UiComponents.Neptune.Models;assembly=Neptune"
+    >
+  <Include.Resources>
+
+    <Model x:Key="NeptuneHomeModel" Id="F3CF9C2A-5B95-49A5-98DA-12328692AA18"/>
+
+    <!-- Header has to be defined by the includer: "Header_Text" -->
+
+    <ControlTemplate x:Key="Client_Template">
+      <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="False" Margin="0,-100,0,0">
+
+        <!--The main timeline-->        
+        <ListView x:Name="MainTimeline" DockPanel.Dock="Center" HorizontalAlignment="Stretch" Style="{ThemeResource HomeTimelineListViewStyle}"
+                  Margin="-900, 10"
+                  ItemsSource="{Binding Source={StaticResource NeptuneHomeModel}, Path=HomeMenuItems, Mode=OneTime}">
+          <ListView.Resources>
+
+            <!--Command to execute when a tile gets focus-->
+            <Command x:Key="Menu_Focus_Command" Source="{StaticResource NeptuneHomeModel}" Path="SetSelectedHomeItem"
+                     Parameters="{LateBoundValue BindingValue={Binding}}"/>
+
+            <!--Command to execute when a tile is clicked-->
+            <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
+            
+          </ListView.Resources>
+        </ListView>
+
+      </DockPanel>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Alternative_Footer_Template">
+      <Include Source="screens\MultiDetails.inc"/>
+    </ControlTemplate>
+
+  </Include.Resources>
+</Include>

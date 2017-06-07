@@ -73,19 +73,24 @@
     <Compile Include="..\..\..\Core\MediaPortal.Common\VersionInfo\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\NeptuneTimelineControl.cs" />
     <Compile Include="Converters\StringCaseConverter.cs" />
     <Compile Include="Models\GroupMenuListItem.cs" />
     <Compile Include="Models\GridListItem.cs" />
     <Compile Include="Models\GroupMenuListView.cs" />
+    <Compile Include="Models\HomeItems\HomeGroupItem.cs" />
+    <Compile Include="Models\HomeItems\HomeItem.cs" />
     <Compile Include="Models\HomeMenuModel.cs" />
     <Compile Include="Models\GridListView.cs" />
     <Compile Include="Models\LatestMediaModel.cs" />
+    <Compile Include="Models\NeptuneHomeModel.cs" />
     <Compile Include="Models\PowerMenuModel.cs" />
     <Compile Include="Models\SetupModel.cs" />
     <Compile Include="Models\SynchronousSettingsChangeWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Configuration\MenuSettingsConfiguration.cs" />
     <Compile Include="Settings\MenuSettings.cs" />
+    <Compile Include="Settings\NeptuneSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Language\strings_en.xml" />
@@ -669,6 +674,10 @@
       <Project>{4FE7B8AE-1330-424A-91A1-C68D7ABF9CB8}</Project>
       <Name>MediaPortal.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FanArt\FanArtService.Client\FanArtService.Client.csproj">
+      <Project>{CDA7272F-E218-42A0-A53A-2D44E4015FF7}</Project>
+      <Name>FanArtService.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SkinEngine\SkinEngine.csproj">
       <Project>{7E943389-3589-40C9-B481-2E223554CC49}</Project>
       <Name>SkinEngine</Name>
@@ -935,6 +944,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Neptune\themes\default\styles\AudioSpectrumAnalyzer.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Neptune\screens\master_neptune_homemenu.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Neptune\themes\default\styles\HomeStyles.xaml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
