@@ -92,6 +92,7 @@
                 Background="White"
                 CornerRadius="18"
 				Opacity="0.25"
+				IsVisible="{Binding Path=Duration,Converter={StaticResource ReferenceToBoolConverter}}"
             />
   
   <StackPanel Grid.Column="0" Margin="0,-2,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">

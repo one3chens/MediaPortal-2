@@ -18,8 +18,8 @@
   to save memory and improve performance. Each tile group is a single virtualized item
   and virtualization requires that each item has the same dimensions.
   -->
-  <ResourceWrapper x:Key="TileGroupWidth" Resource="800" />
-  <ResourceWrapper x:Key="TileGroupHeight" Resource="700" />
+  <ResourceWrapper x:Key="TileGroupWidth" Resource="620" />
+  <ResourceWrapper x:Key="TileGroupHeight" Resource="620" />
   
   <!--The margin around each tile-->
   <ResourceWrapper x:Key="TileMargin" Resource="5" />
@@ -44,7 +44,7 @@
 
       <!-- Light blue background fill -->
       <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                   x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"
@@ -80,7 +80,7 @@
 
       <!-- Light blue background fill -->
       <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                   x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
@@ -91,12 +91,15 @@
       </Image>
 
       <!-- Darkened band -->
+	  <!--
       <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
+      -->
       <!-- Item label -->
+	  <!--
       <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding SimpleTitle}"
                FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+	  -->
     </Grid>
   </ControlTemplate>
 
@@ -112,7 +115,7 @@
       </Grid.RowDefinitions>
 
       <!-- Light blue background fill -->
-      <Rectangle x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+      <Rectangle x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
@@ -145,7 +148,7 @@
 
       <!-- Light blue background fill -->
       <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                   x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
@@ -156,12 +159,15 @@
       </Image>
 
       <!-- Darkened band -->
+	  <!--
       <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
+      -->
       <!-- Item label -->
+	  <!--
       <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Series}"
                FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+	  -->	   
     </Grid>
   </ControlTemplate>
 
@@ -177,7 +183,7 @@
       </Grid.RowDefinitions>
 
       <!-- Light blue background fill -->
-      <Rectangle x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+      <Rectangle x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill">
@@ -210,19 +216,23 @@
 
       <!-- Light blue background fill -->
       <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                   x:Name="HomeFill" Fill="#FF808080" Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                   x:Name="HomeFill" Fill="black" Opacity="0.4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
       <!-- Image -->
       <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill"
                Source="{Binding MediaItem}"/>
 
       <!-- Darkened band -->
+	  <!--
       <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FF000000" Opacity="0.749"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+				   -->
 
       <!-- Item label -->
+	  <!--
       <Label Grid.Row="1" Grid.Column="0" x:Name="ItemLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Album}"
                FontSize="{ThemeResource BigFontSize}" Color="{ThemeResource HomeNonFocusedColor}"/>
+			   -->
     </Grid>
   </ControlTemplate>
 
@@ -380,7 +390,7 @@
       </Grid.ColumnDefinitions>
 
       <Grid.RowDefinitions>
-        <RowDefinition Height="2*"/>
+        <RowDefinition Height="3*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 

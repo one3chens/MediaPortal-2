@@ -13,7 +13,7 @@
     <!-- Header has to be defined by the includer: "Header_Text" -->
 
     <ControlTemplate x:Key="Client_Template">
-      <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="False" Margin="0,-100,0,0">
+      <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="False" Margin="0,-7,0,0">
 
         <!--The main timeline-->        
         <ListView x:Name="MainTimeline" DockPanel.Dock="Center" HorizontalAlignment="Stretch" Style="{ThemeResource HomeTimelineListViewStyle}"
