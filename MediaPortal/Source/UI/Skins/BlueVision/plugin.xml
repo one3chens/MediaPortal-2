@@ -35,7 +35,7 @@
 
   <Register Location="/Workflow/States">
     <DialogState Id="F3A23F49-C9CA-4FFE-9A2D-CCC7B936A2A8" Name="BlueVisionConfiguration" DialogScreen="dialogBlueVisionConfiguration"
-        DisplayLabel="[Settings.Plugins.Trakt.TraktSetup]" WorkflowModel="92A16CDF-480B-4A40-9C76-7F9B0779319F"/>
+        DisplayLabel="[BlueVision.Configuration]" WorkflowModel="92A16CDF-480B-4A40-9C76-7F9B0779319F"/>
   </Register>
 
   <!-- Language resources -->

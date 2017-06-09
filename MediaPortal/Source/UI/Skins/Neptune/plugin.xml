@@ -35,10 +35,10 @@
     <Model Id="60C4935F-47EA-4103-A9AD-CB198FA40764" Name="PowerMenuModel" ClassName="MediaPortal.UiComponents.Neptune.Models.PowerMenuModel"/>
   </Register>
 
-  <!--Register Location="/Workflow/States">
-    <DialogState Id="F3A23F49-C9CA-4FFE-9A2D-CCC7B936A2A8" Name="NeptuneConfiguration" DialogScreen="dialogNeptuneConfiguration"
-        DisplayLabel="[Settings.Plugins.Trakt.TraktSetup]" WorkflowModel="7E252D7F-0ACD-46D1-9BCE-436B12110537"/>
-  </Register-->
+  <Register Location="/Workflow/States">
+    <DialogState Id="5F27863C-B48F-423D-9259-AA5DFC5583A2" Name="NeptuneConfiguration" DialogScreen="dialogNeptuneConfiguration"
+        DisplayLabel="[Neptune.Configuration]" WorkflowModel="7E252D7F-0ACD-46D1-9BCE-436B12110537"/>
+  </Register>
 
   <!-- Language resources -->
   <Register Location="/Resources/Language">
@@ -72,7 +72,7 @@
         Text="[Neptune.Configuration]"
         HelpText="[Neptune.Configuration.Help]"
         ClassName="MediaPortal.UiComponents.Neptune.Settings.Configuration.MenuSettingsConfiguration"
-        AdditionalData="WorkflowState=F3A23F49-C9CA-4FFE-9A2D-CCC7B936A2A8,ConfAppPanel=..."/>
+        AdditionalData="WorkflowState=5F27863C-B48F-423D-9259-AA5DFC5583A2,ConfAppPanel=..."/>
   </Register>
 
 </Plugin>
