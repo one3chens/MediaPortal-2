@@ -30,7 +30,6 @@ using MediaPortal.Common.Settings;
 using MediaPortal.Extensions.UserServices.FanArtService.Client.Models;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Workflow;
-using MediaPortal.UI.SkinEngine.MpfElements;
 using MediaPortal.UiComponents.Media.Models.Navigation;
 using MediaPortal.UiComponents.Neptune.Models.HomeItems;
 using MediaPortal.UiComponents.Neptune.Settings;
@@ -56,7 +55,11 @@ namespace MediaPortal.UiComponents.Neptune.Models
 
     public static readonly Guid HOME_STATE_ID = new Guid("7F702D9C-F2DD-42da-9ED8-0BA92F07787F");
 
-    protected const int MAX_ITEMS_PER_GROUP = 4;
+    protected const int PLUGIN_ITEMS_PER_GROUP = 4;
+    protected const int MOVIE_ITEMS_PER_GROUP = 3;
+    protected const int SERIES_ITEMS_PER_GROUP = 3;
+    protected const int AUDIO_ITEMS_PER_GROUP = 4;
+
     protected const int LATEST_MEDIA_REFRESH_INTERVAL = 300;
 
     #endregion
@@ -65,7 +68,7 @@ namespace MediaPortal.UiComponents.Neptune.Models
 
     protected bool _isInitialized;
     protected DateTime _lastLatestMediaRefresh = DateTime.MinValue;
-
+    protected Guid? _lastSelectedHomeItemId = null;
     protected ItemsList _homeMenuItems;
     protected ICollection<Guid> _currentPluginIds;
     protected ICollection<Guid> _currentMovieIds;
@@ -189,39 +192,59 @@ namespace MediaPortal.UiComponents.Neptune.Models
     {
       InitMenu();
 
-      bool listNeedsUpdate = false;
-
-      //Plugins
-      List<HomeItem> pluginItems = GetSortedPluginItems();
-      listNeedsUpdate |= TryUpdateCurrentItems(pluginItems, _currentPluginIds);
-
-      //Latest media
-      var lm = LatestMediaModel;
-
-      //Movies
-      List<HomeItem> movieItems = GetLatestMediaItems(lm.Movies, MAX_ITEMS_PER_GROUP);
-      listNeedsUpdate |= TryUpdateCurrentItems(movieItems, _currentMovieIds);
-
-      //Series
-      List<HomeItem> seriesItems = GetLatestMediaItems(lm.Series, 2);
-      listNeedsUpdate |= TryUpdateCurrentItems(seriesItems, _currentSeriesIds);
-
-      //Audio
-      List<HomeItem> audioItems = GetLatestMediaItems(lm.Audio, MAX_ITEMS_PER_GROUP);
-      listNeedsUpdate |= TryUpdateCurrentItems(audioItems, _currentAudioIds);
-
-      if (!listNeedsUpdate)
+      IList<HomeGroupItem> groupItems;
+      if (!CreateHomeGroupItems(out groupItems))
+        //Nothing changed
         return;
-
+      
       _homeMenuItems.Clear();
-      AddHomeGroups<UniformTileGroup>(pluginItems, true);
-      AddHomeGroups<PosterBannerGroup>(movieItems, false);
-      AddHomeGroups<PosterGroup>(seriesItems, false, 2);
-      AddHomeGroups<UniformTileGroup>(audioItems, false);
+      CollectionUtils.AddAll(_homeMenuItems, groupItems);
       _homeMenuItems.FireChange();
     }
 
-    protected void AddHomeGroups<T>(IEnumerable<HomeItem> items, bool reverse, int maxItemsPerGroup = MAX_ITEMS_PER_GROUP) where T : HomeGroupItem, new()
+    protected bool CreateHomeGroupItems(out IList<HomeGroupItem> groupItems)
+    {
+      List<HomeItem> items = new List<HomeItem>();
+      groupItems = new List<HomeGroupItem>();
+      Guid? lastSelectedHomeItemId = _lastSelectedHomeItemId;
+
+      bool listUpdated = false;
+
+      //Plugins
+      List<HomeItem> pluginItems = GetSortedPluginItems();
+      items.AddRange(pluginItems);
+      AddHomeGroups<UniformTileGroup>(pluginItems, groupItems, PLUGIN_ITEMS_PER_GROUP, true);
+      listUpdated |= TryUpdateCurrentItemIds(pluginItems, _currentPluginIds);
+
+      //Latest media
+      var lm = LatestMediaModel;
+      if (lm != null)
+      {
+        //Movies
+        List<HomeItem> movieItems = GetLatestMediaItems(lm.Movies, MOVIE_ITEMS_PER_GROUP);
+        items.AddRange(movieItems);
+        AddHomeGroups<PosterBannerGroup>(movieItems, groupItems, MOVIE_ITEMS_PER_GROUP);
+        listUpdated |= TryUpdateCurrentItemIds(movieItems, _currentMovieIds);
+
+        //Series
+        List<HomeItem> seriesItems = GetLatestMediaItems(lm.Series, SERIES_ITEMS_PER_GROUP);
+        items.AddRange(seriesItems);
+        AddHomeGroups<BannerPosterGroup>(seriesItems, groupItems, SERIES_ITEMS_PER_GROUP);
+        listUpdated |= TryUpdateCurrentItemIds(seriesItems, _currentSeriesIds);
+
+        //Audio
+        List<HomeItem> audioItems = GetLatestMediaItems(lm.Audio, AUDIO_ITEMS_PER_GROUP);
+        items.AddRange(audioItems);
+        AddHomeGroups<UniformTileGroup>(audioItems, groupItems, AUDIO_ITEMS_PER_GROUP);
+        listUpdated |= TryUpdateCurrentItemIds(audioItems, _currentAudioIds);
+      }
+
+      if (listUpdated)
+        TrySetSelectedItem(items, _lastSelectedHomeItemId);
+      return listUpdated;
+    }
+
+    protected void AddHomeGroups<T>(IEnumerable<HomeItem> items, IList<HomeGroupItem> groups, int maxItemsPerGroup, bool reverse = false) where T : HomeGroupItem, new()
     {
       T currentGroup = null;
       foreach (HomeItem item in items)
@@ -230,35 +253,23 @@ namespace MediaPortal.UiComponents.Neptune.Models
         if (currentGroup == null)
         {
           currentGroup = new T();
-          if (reverse)
-            _homeMenuItems.Insert(0, currentGroup);
-          else
-            _homeMenuItems.Add(currentGroup);
+          AddItem(groups, currentGroup, reverse);
         }
 
-        if (reverse)
-          currentGroup.Items.Insert(0, item);
-        else
-          currentGroup.Items.Add(item);
-
+        AddItem(currentGroup.Items, item, reverse);
         if (currentGroup.Items.Count == maxItemsPerGroup)
           currentGroup = null;
       }
 
-      if (currentGroup == null)
-        return;
-
-      //Fill the rest of the last group with empty items
-      while (currentGroup.Items.Count < maxItemsPerGroup)
+      if (currentGroup != null)
       {
-        if (reverse)
-          currentGroup.Items.Insert(0, new HomeItem());
-        else
-          currentGroup.Items.Add(new HomeItem());
+        //Fill the rest of the last group with empty items
+        while (currentGroup.Items.Count < maxItemsPerGroup)
+          AddItem(currentGroup.Items, new HomeItem(), reverse);
       }
     }
 
-    protected bool TryUpdateCurrentItems(ICollection<HomeItem> items, ICollection<Guid> currentIds)
+    protected bool TryUpdateCurrentItemIds(ICollection<HomeItem> items, ICollection<Guid> currentIds)
     {
       if (items.Count == currentIds.Count && items.All(i => currentIds.Contains(i.ItemId)))
         return false;
@@ -266,6 +277,27 @@ namespace MediaPortal.UiComponents.Neptune.Models
       currentIds.Clear();
       CollectionUtils.AddAll(currentIds, items.Select(i => i.ItemId));
       return true;
+    }
+
+    protected bool TrySetSelectedItem(IEnumerable<HomeItem> items, Guid? selectedItemId)
+    {
+      if (!selectedItemId.HasValue)
+        return false;
+      HomeItem selectedItem = items.FirstOrDefault(i => i.ItemId == selectedItemId.Value);
+      if (selectedItem == null)
+        selectedItem = items.FirstOrDefault();
+      if (selectedItem == null)
+        return false;
+      selectedItem.Selected = true;
+      return true;
+    }
+
+    protected static void AddItem<T>(IList<T> target, T item, bool reverse)
+    {
+      if (reverse)
+        target.Insert(0, item);
+      else
+        target.Add(item);
     }
 
     #endregion
@@ -363,16 +395,16 @@ namespace MediaPortal.UiComponents.Neptune.Models
 
     #region Selection change handlers
 
-    public void SetSelectedItem(object sender, SelectionChangedEventArgs e)
-    {
-      UpdateSelectedFanArtItem(e.FirstAddedItem as ListItem);
-    }
-
     public void SetSelectedHomeItem(object item)
     {
       HomeItem homeItem = item as HomeItem;
-      object fanartItem = homeItem != null ? homeItem.Item : item;
-      UpdateSelectedFanArtItem(fanartItem as ListItem);
+      if (homeItem != null)
+      {
+        _lastSelectedHomeItemId = homeItem.ItemId;
+        item = homeItem.Item;
+      }
+
+      UpdateSelectedFanArtItem(item as ListItem);
     }
 
     protected void UpdateSelectedFanArtItem(ListItem item)

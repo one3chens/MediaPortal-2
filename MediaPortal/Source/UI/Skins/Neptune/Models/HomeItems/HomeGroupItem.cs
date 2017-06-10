@@ -48,9 +48,17 @@ namespace MediaPortal.UiComponents.Neptune.Models.HomeItems
   }
 
   /// <summary>
-  /// Container for 3 poster tiles and a banner tile.
+  /// Container for 2 poster tiles above a banner tile.
   /// </summary>
   public class PosterBannerGroup : HomeGroupItem
+  {
+
+  }
+
+  /// <summary>
+  /// Container for a banner tile above 2 poster tiles.
+  /// </summary>
+  public class BannerPosterGroup : HomeGroupItem
   {
 
   }

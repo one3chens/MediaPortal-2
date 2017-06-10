@@ -246,7 +246,7 @@
 
   <ControlTemplate x:Key="TileButtonTemplate">
     <Button Style="{ThemeResource HomeButtonStyle}" Margin="{ThemeResource TileMargin}"
-            Content="{Binding Item}"
+            Content="{Binding Item}" SetFocus="{Binding Path=Selected,Mode=OneTime}"
             Command="{DynamicResource Menu_Command}">
       <Button.Triggers>
         <Trigger Property="HasFocus" Value="True">
@@ -379,12 +379,11 @@
     </Grid>
   </DataTemplate>
 
-  <!--Displays 3 poster tiles above a banner tile-->
+  <!--Displays 2 poster tiles above a banner tile-->
   <DataTemplate DataType="{x:Type neptune:PosterBannerGroup}">
     <Grid Width="{ThemeResource TileGroupWidth}" Height="{ThemeResource TileGroupHeight}">
 
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
@@ -404,14 +403,41 @@
                DataContext="{Binding Items[1]}"
                IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
 
-      <Control Grid.Column="2" Grid.Row="0"
-               Template="{ThemeResource PosterTileContainerTemplate}"
+      <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+               Template="{ThemeResource BannerTileContainerTemplate}"
                DataContext="{Binding Items[2]}"
                IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
 
-      <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+    </Grid>
+  </DataTemplate>
+
+  <!--Displays a banner tile above 2 poster tiles -->
+  <DataTemplate DataType="{x:Type neptune:BannerPosterGroup}">
+    <Grid Width="{ThemeResource TileGroupWidth}" Height="{ThemeResource TileGroupHeight}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="3*"/>
+      </Grid.RowDefinitions>
+
+      <Control Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                Template="{ThemeResource BannerTileContainerTemplate}"
-               DataContext="{Binding Items[3]}"
+               DataContext="{Binding Items[0]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="0" Grid.Row="1"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[1]}"
+               IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
+
+      <Control Grid.Column="1" Grid.Row="1"
+               Template="{ThemeResource PosterTileContainerTemplate}"
+               DataContext="{Binding Items[2]}"
                IsVisible="{Binding Path=Item, Converter={StaticResource ReferenceToBoolConverter}}"/>
 
     </Grid>
