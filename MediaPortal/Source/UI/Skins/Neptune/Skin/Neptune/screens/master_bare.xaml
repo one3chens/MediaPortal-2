@@ -171,14 +171,39 @@ Parameters which have to be accessible by a DynamicResource lookup:
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="540"/>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="150"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="90"/>
       </Grid.ColumnDefinitions>
 
+
+      <!-- Main Menu Group tabs -->
+      <bvm:GroupMenuListView x:Name="GroupList" Style="{ThemeResource HomeGroupListViewStyle}" Grid.Row="0" Grid.Column="0"
+                             VerticalAlignment="Center" HorizontalAlignment="Right"
+                             HomeMenuModel="{StaticResource MenuModel}" Margin="-5,28,20,-5"
+                             IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}"
+                             ItemsSource="{Binding Source={StaticResource MenuModel},Path=MainMenuGroupList,Mode=OneTime}"
+                             SelectionChanged="{CommandStencil Source={StaticResource MenuModel},Path=OnGroupItemSelectionChanged}">
+        <bvm:GroupMenuListView.Resources>
+          <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
+        </bvm:GroupMenuListView.Resources>
+      </bvm:GroupMenuListView>
+	  
+	  
+      <!-- Menu button -->
+	  <!--
+      <Control Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Center"
+               x:Name="MenuButtonDummy" Template="{DynamicResource ResourceKey=Menu_Button_Dummy}"></Control>
+      <Control Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Center"
+               x:Name="MenuButtonDummyConfig" Template="{DynamicResource ResourceKey=Menu_Button_DummyConfig}"></Control>
+			   -->
+      <Control Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,30,-10"
+               x:Name="MenuButtonPlaceholder" Template="{DynamicResource ResourceKey=Menu_Button_Placeholder}"></Control>	  
+	  
+	  
       <!-- Power button -->
-      <Button x:Name="PowerButton" Style="{ThemeResource PowerButtonStyle}" Margin="75,0,0,-30"
-              HorizontalAlignment="Left" VerticalAlignment="Center"
+      <Button x:Name="PowerButton" Style="{ThemeResource PowerButtonStyle}" Margin="0,0,60,-30" Grid.Row="0" Grid.Column="2"
+              HorizontalAlignment="Center" VerticalAlignment="Center"
               IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}"
               Command="{Command Source={Service WorkflowManager},Path=NavigatePush,Parameters=BBFA7DB7-5055-48D5-A904-0F0C79849369}">
         <Button.Triggers>
@@ -188,31 +213,7 @@ Parameters which have to be accessible by a DynamicResource lookup:
             </Trigger.Setters>
           </Trigger>
         </Button.Triggers>
-      </Button>
-
-
-
-      <!-- Main Menu Group tabs -->
-      <bvm:GroupMenuListView x:Name="GroupList" Style="{ThemeResource HomeGroupListViewStyle}" Grid.Row="0" Grid.Column="1"
-                             VerticalAlignment="Center" HorizontalAlignment="Right"
-                             HomeMenuModel="{StaticResource MenuModel}" Margin="-5,30,-5,-8"
-                             IsEnabled="{Binding Source={StaticResource MenuModel},Path=!IsMenuOpen}"
-                             ItemsSource="{Binding Source={StaticResource MenuModel},Path=MainMenuGroupList,Mode=OneTime}"
-                             SelectionChanged="{CommandStencil Source={StaticResource MenuModel},Path=OnGroupItemSelectionChanged}">
-        <bvm:GroupMenuListView.Resources>
-          <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
-        </bvm:GroupMenuListView.Resources>
-      </bvm:GroupMenuListView>
-
-
-
-      <!-- Menu button -->
-      <Control Grid.Row="0" Grid.Column="2" Margin="0,0,0,0" VerticalAlignment="Center"
-               x:Name="MenuButtonDummy" Template="{DynamicResource ResourceKey=Menu_Button_Dummy}"></Control>
-      <Control Grid.Row="0" Grid.Column="2" Margin="0,0,0,0" VerticalAlignment="Center"
-               x:Name="MenuButtonDummyConfig" Template="{DynamicResource ResourceKey=Menu_Button_DummyConfig}"></Control>
-      <Control Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,0,-10"
-               x:Name="MenuButtonPlaceholder" Template="{DynamicResource ResourceKey=Menu_Button_Placeholder}"></Control>
+      </Button>	  
 
     </Grid>
 

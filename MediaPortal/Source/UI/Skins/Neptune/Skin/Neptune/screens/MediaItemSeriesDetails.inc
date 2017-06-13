@@ -98,17 +98,18 @@
 	########################################################################################################################################
     -->
 	
-                
+                <!--
 	  <media:SeriesAspectWrapper MediaItem="{Binding Source={StaticResource FanArtBackgroundModel},Path=MediaItem}" Grid.Row="2" Grid.Column="0" Margin="12,0,0,-5">
         <media:SeriesAspectWrapper.Template>
 		<ControlTemplate>
-		<Label x:Name="NextAirDate" Content="{Binding Actors}" TextTrimming="WordEllipsis" FontSize="{ThemeResource ListFontSize}"
+		<Label x:Name="Actors" Content="{Binding TotalRating}" TextTrimming="WordEllipsis" FontSize="{ThemeResource ListFontSize}"
 		     DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-             Color="{ThemeResource TextColor}" FontFamily="Default" Margin="0,0,0,0" Opacity="0.6">
+             Color="{ThemeResource TextColor}" FontFamily="Default" Margin="0,0,0,0" Opacity="0.9">
 		</Label>	  
 		</ControlTemplate>
 	    </media:SeriesAspectWrapper.Template>
       </media:SeriesAspectWrapper>	
+	  -->
 
   
   

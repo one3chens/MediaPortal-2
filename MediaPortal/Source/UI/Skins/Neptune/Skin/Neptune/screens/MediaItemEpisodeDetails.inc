@@ -109,20 +109,22 @@
     </Label>
 -->
 
-  <Grid Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">
+  <Grid Grid.Column="0" Grid.Row="2" Margin="0,0,0,0">
     <Grid.ColumnDefinitions>
     <ColumnDefinition Width="*"/>
     <ColumnDefinition Width="1120"/>
   </Grid.ColumnDefinitions>
             <!-- Rounded mask (stretches to fill Grid) -->
+			<!--
             <Border
                 Name="mask"
                 Background="White"
                 CornerRadius="18"
 				Opacity="0.25"
             />
+			-->
   
-  <StackPanel Grid.Column="0" Margin="0,-2,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+  <StackPanel Grid.Column="0" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
   
     <!-- 
 	########################################################################################################################################
@@ -135,7 +137,7 @@
         <ControlTemplate>
           <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
             <StackPanel Orientation="Horizontal">
-              <Label x:Name="Duration" Color="{ThemeResource TextColor}" Opacity="1" FontSize="{ThemeResource DateTimeFontSize}" FontFamily="DefaultBold"
+              <Label x:Name="Duration" Color="{ThemeResource TextColor}" Opacity="0.9" FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold"
                      IsVisible="{Binding Path=Duration,Converter={StaticResource ReferenceToBoolConverter}}">
                 <Label.Content>
                   <MultiBinding Converter="{StaticResource ExpressionMultiValueConverter}" ConverterParameter="{}{0}/60">
@@ -144,7 +146,7 @@
                 </Label.Content>
               </Label>
               <Label Content=" " IsVisible="{Binding Path=Duration,Converter={StaticResource ReferenceToBoolConverter}}"/>
-              <Label Content="[Media.Minutes]" Color="{ThemeResource TextColor}" Opacity="1" FontSize="{ThemeResource DateTimeFontSize}" FontFamily="DefaultBold"
+              <Label Content="[Media.Minutes]" Color="{ThemeResource TextColor}" Opacity="0.9" FontSize="{ThemeResource ListFontSize}" FontFamily="DefaultBold"
                      IsVisible="{Binding Path=Duration,Converter={StaticResource ReferenceToBoolConverter}}"/>
 					 
             </StackPanel>
