@@ -221,6 +221,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerStateService.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerStateService.Client", "Backend\BackendComponents\ServerStateService\ServerStateService.Client\ServerStateService.Client.csproj", "{FDC93BA2-C254-4339-B892-E974E26AEB37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nereus", "UI\Skins\Nereus\Nereus.csproj", "{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -555,6 +557,10 @@ Global
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Debug|x86.Build.0 = Debug|x86
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Release|x86.ActiveCfg = Release|x86
 		{FDC93BA2-C254-4339-B892-E974E26AEB37}.Release|x86.Build.0 = Release|x86
+		{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB}.Debug|x86.ActiveCfg = Debug|x86
+		{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB}.Debug|x86.Build.0 = Debug|x86
+		{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB}.Release|x86.ActiveCfg = Release|x86
+		{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -661,5 +667,6 @@ Global
 		{01C1F58C-A510-43BA-B2C7-E7E27DCB2396} = {5B0609A9-F3B5-41F8-81A5-3CE327A4ECD7}
 		{1CD36F37-70FF-442F-8B1E-528F41D76F34} = {01C1F58C-A510-43BA-B2C7-E7E27DCB2396}
 		{FDC93BA2-C254-4339-B892-E974E26AEB37} = {01C1F58C-A510-43BA-B2C7-E7E27DCB2396}
+		{3F405B5B-AD46-4325-8B8A-46FE2A13E4AB} = {9579F1D5-315A-4528-AC60-FA7D61874E27}
 	EndGlobalSection
 EndGlobal
