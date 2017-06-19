@@ -206,7 +206,6 @@ namespace MediaPortal.UiComponents.Neptune.Models
     {
       List<HomeItem> items = new List<HomeItem>();
       groupItems = new List<HomeGroupItem>();
-      Guid? lastSelectedHomeItemId = _lastSelectedHomeItemId;
 
       bool listUpdated = false;
 
@@ -240,7 +239,13 @@ namespace MediaPortal.UiComponents.Neptune.Models
       }
 
       if (listUpdated)
-        TrySetSelectedItem(items, _lastSelectedHomeItemId);
+      {
+        Guid? lastSelectedHomeItemId = _lastSelectedHomeItemId;
+        //default to selecting first plugin item
+        Guid? defaultSelectedHomeId = pluginItems.Count > 0 ? pluginItems[0].ItemId : (Guid?)null;
+        TrySetSelectedItem(items, lastSelectedHomeItemId, defaultSelectedHomeId);
+      }
+
       return listUpdated;
     }
 
@@ -279,15 +284,19 @@ namespace MediaPortal.UiComponents.Neptune.Models
       return true;
     }
 
-    protected bool TrySetSelectedItem(IEnumerable<HomeItem> items, Guid? selectedItemId)
+    protected bool TrySetSelectedItem(ICollection<HomeItem> items, Guid? selectedItemId, Guid? defaultItemId)
     {
-      if (!selectedItemId.HasValue)
+      if (items == null || items.Count == 0)
         return false;
-      HomeItem selectedItem = items.FirstOrDefault(i => i.ItemId == selectedItemId.Value);
+
+      HomeItem selectedItem = null;
+      if (selectedItemId.HasValue)
+        selectedItem = items.FirstOrDefault(i => i.ItemId == selectedItemId.Value);
+      if (selectedItem == null && defaultItemId.HasValue)
+        selectedItem = items.FirstOrDefault(i => i.ItemId == defaultItemId.Value);
       if (selectedItem == null)
         selectedItem = items.FirstOrDefault();
-      if (selectedItem == null)
-        return false;
+
       selectedItem.Selected = true;
       return true;
     }
