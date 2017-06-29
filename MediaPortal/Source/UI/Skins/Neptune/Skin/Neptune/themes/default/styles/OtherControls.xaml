@@ -14,7 +14,8 @@
     >
 
   <!-- BackgroundManager model -->
-  <Model x:Key="BackgroundManagerModel" Id="1F4CAEDE-7108-483d-B5C8-18BEC7EC58E5"/> 
+  <Model x:Key="BackgroundManagerModel" Id="1F4CAEDE-7108-483d-B5C8-18BEC7EC58E5"/>
+  <Model x:Key="GeneralPlayerModel" Id="A2F24149-B44C-498b-AE93-288213B87A1A"/>
   <bgm:ListItemActionIdConverter x:Key="ListItemActionIdConverter"/>
 
   <!-- ***************************** Converters ********************************* -->
@@ -1052,24 +1053,24 @@
 
   <ControlTemplate x:Key="PlayerControlButtons">
     <Grid HorizontalAlignment="Center" Margin="0">
-
       <StackPanel x:Name="MouseControlsPanel" Orientation="Horizontal" IsVisible="True" Margin="10,0,10,0" Height="30">
+        <Button x:Name="SwitchPlayerButton" Style="{ThemeResource SwitchPlayerDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding IsPip}"
+                Command="{Command Source={StaticResource GeneralPlayerModel},Path=ToggleCurrentPlayer}"/>
         <Button x:Name="SkipBackButton" Style="{ThemeResource SkipBackDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanSkipBack}"
-              Command="{Command Previous}"/>
+                Command="{Command Previous}"/>
         <Button x:Name="RewindButton" Style="{ThemeResource RewindDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanSeekBackward}"
-              Command="{Command SeekBackward}"/>
+                Command="{Command SeekBackward}"/>
         <Button x:Name="PlayButton" Style="{ThemeResource PlayDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanPlay}"
-              Command="{Command Play}"/>
+                Command="{Command Play}"/>
         <Button x:Name="PauseButton" Style="{ThemeResource PauseDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanPause}"
-              Command="{Command Pause}"/>
+                Command="{Command Pause}"/>
         <Button x:Name="StopButton" Style="{ThemeResource StopDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanStop}"
-              Command="{Command Stop}"/>
+                Command="{Command Stop}"/>
         <Button x:Name="ForwardButton" Style="{ThemeResource ForwardDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanSeekForward}"
-              Command="{Command SeekForward}"/>
+                Command="{Command SeekForward}"/>
         <Button x:Name="SkipForwardButton" Style="{ThemeResource SkipForwardDarkButtonStyle}" Margin="{ThemeResource PlayerControlHomeButtonMargins}" IsVisible="{Binding CanSkipForward}"
-              Command="{Command Next}"/>
+                Command="{Command Next}"/>
       </StackPanel>
-
     </Grid>
 
   </ControlTemplate>

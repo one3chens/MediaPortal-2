@@ -960,6 +960,12 @@
     </Style.Resources>
   </Style>
 
+  <Style x:Key="SwitchPlayerDarkButtonStyle" BasedOn="{ThemeResource BasePlayerControlButtonStyle}">
+    <Style.Resources>
+      <ResourceWrapper x:Key="ContentControlTemplate" Resource="{ThemeResource SwitchPlayerDarkControlTemplate}" />
+    </Style.Resources>
+  </Style>
+
   <!-- audio mute control style -->
   <Style x:Key="AudioActiveButtonStyle" TargetType="{x:Type CheckBox}">
     <Setter Property="Template">
@@ -1364,6 +1370,12 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
+  </Style>
+
+  <Style x:Key="SwitchPlayerButtonStyle" BasedOn="{ThemeResource BasePlayerControlButtonStyle}">
+    <Style.Resources>
+      <ResourceWrapper x:Key="ContentControlTemplate" Resource="{ThemeResource SwitchPlayerControlTemplate}" />
+    </Style.Resources>
   </Style>
 
 </ResourceDictionary>
