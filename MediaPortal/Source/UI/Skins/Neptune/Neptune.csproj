@@ -913,11 +913,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Skin\Neptune\screens\master_bare_players.xaml">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Skin\Neptune\screens\CurrentlyPlayingAudio.xaml">
       <SubType>Designer</SubType>
     </Content>
