@@ -49,25 +49,42 @@ Parameters which have to be accessible by a DynamicResource lookup:
     <ControlTemplate x:Key="Client_Template">
       <Grid x:Name="MainLayoutPanel" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-110,0,0">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="480"/>
+          <ColumnDefinition Width="200"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
           <Model x:Key="MenuModel" Id="9E9D0CD9-4FDB-4c0f-A0C4-F356E151BDE0"/>
         </Grid.Resources>
 
-        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Rectangle Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.9"/>
+        <Image Source="LeftMenuIndicator.PNG" HorizontalAlignment="Right" Stretch="Fill" Width="25" Height="45" 
+               Opacity="0.9" VerticalAlignment="Center" Margin="0,0,-25,0"/>
+        <wmc:ExcludeItemsListActionIdFilter x:Name="MainMenuFilter" Grid.Column="0" Filter="{StaticResource ActionIdFilter}"
+                HorizontalAlignment="Center" ItemsSource="{Binding Source={StaticResource MenuModel}, Path=MenuItems, Mode=OneTime}">
+          <wmc:ExcludeItemsListActionIdFilter.Template>
+            <ControlTemplate>
+              <ListView x:Name="MainMenu" Style="{ThemeResource HomeMenuListViewStyle}"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SetFocusPrio="DefaultHigh"
+                  ItemsSource="{Binding Source={StaticResource MenuModel},Path=MenuItems,Mode=OneTime}">
+                <ListView.Resources>
+                  <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
+                </ListView.Resources>
+              </ListView>
+            </ControlTemplate>
+          </wmc:ExcludeItemsListActionIdFilter.Template>
+        </wmc:ExcludeItemsListActionIdFilter>
+
+        <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
           </Grid.RowDefinitions>
-          <Rectangle Fill="Black" Opacity="0.7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+          <!--Rectangle Fill="Black" Opacity="0.7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/-->
           <Button Height="70" Width="70" Style="{ThemeResource EmptyButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                   Command="{Command Source={Service WorkflowManager},Path=NavigatePush,Parameters=BBFA7DB7-5055-48D5-A904-0F0C79849369}">
             <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -82,22 +99,7 @@ Parameters which have to be accessible by a DynamicResource lookup:
               </Trigger>
             </Button.Triggers>
           </Button>
-          </Grid>
-
-        <wmc:ExcludeItemsListActionIdFilter x:Name="MainMenuFilter" Grid.Column="0" Grid.Row="1"  Filter="{StaticResource ActionIdFilter}"
-                                            ItemsSource="{Binding Source={StaticResource MenuModel}, Path=MenuItems, Mode=OneTime}">
-          <wmc:ExcludeItemsListActionIdFilter.Template>
-            <ControlTemplate>
-              <ListView x:Name="MainMenu" Style="{ThemeResource HomeMenuListViewStyle}" Background="Black" Opacity="0.7"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SetFocusPrio="DefaultHigh" Margin="0,0,0,-2"
-                  ItemsSource="{Binding Source={StaticResource MenuModel},Path=MenuItems,Mode=OneTime}">
-                <ListView.Resources>
-                  <CommandBridge x:Key="Menu_Command" Command="{Binding Path=Command,Mode=OneTime}"/>
-                </ListView.Resources>
-              </ListView>
-            </ControlTemplate>
-          </wmc:ExcludeItemsListActionIdFilter.Template>
-        </wmc:ExcludeItemsListActionIdFilter>
+        </Grid>
 
         <!--ListView x:Name="MainMenu" Grid.Column="0" Grid.Row="1" Style="{ThemeResource HomeMenuListViewStyle}" Background="Black" Opacity="0.7"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SetFocusPrio="DefaultHigh" Margin="0,0,0,-2"
