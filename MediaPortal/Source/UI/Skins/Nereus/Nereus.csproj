@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -715,25 +715,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Skin\Nereus\fonts\eurof55.ttf" />
-    <Content Include="Skin\Nereus\fonts\EuroFurence.desc" />
-    <Content Include="Skin\Nereus\fonts\mayatypeui.desc" />
-    <Content Include="Skin\Nereus\fonts\mayatypelight.ttf" />
-    <Content Include="Skin\Nereus\fonts\mayatypeui.ttf" />
-    <Content Include="Skin\Nereus\fonts\mayatypeuitvg.ttf" />
-    <Content Include="Skin\Nereus\fonts\RitzyNormal.desc" />
-    <Content Include="Skin\Nereus\fonts\RitzyNormal.ttf" />
-    <Content Include="Skin\Nereus\fonts\SansBetween.desc" />
-    <Content Include="Skin\Nereus\fonts\SansBetween.ttf" />
-    <Content Include="Skin\Nereus\fonts\SketchyTimes.desc" />
-    <Content Include="Skin\Nereus\fonts\SketchyTimes.ttf" />
-    <None Include="Skin\Nereus\fonts\seguisb.ttf" />
-    <Content Include="Skin\Nereus\fonts\seguisb.desc" />
     <Content Include="Skin\Nereus\screens\InfoMovieGeneral.inc" />
     <Content Include="Skin\Nereus\screens\MediaItemPersonDetails.inc" />
     <Content Include="Skin\Nereus\screens\MediaItemListPersonDetails.inc">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Skin\Nereus\fonts\arial.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Nereus\screens\home.xaml" />
