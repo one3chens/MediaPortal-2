@@ -54,6 +54,9 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
       public List<string> LastUpdatedTracks { get; set; }
     }
 
+    protected readonly object _initSyncObj = new object();
+    protected bool _isInit = false;
+
     #region Init
 
     public MusicMatcher(string cachePath, TimeSpan maxCacheDuration, bool cacheRefreshable)
@@ -69,8 +72,6 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
       _labelMatcher = new SimpleNameMatcher(Path.Combine(cachePath, "LabelMatches.xml"));
       _albumMatcher = new SimpleNameMatcher(Path.Combine(cachePath, "AlbumMatches.xml"));
       _configFile = Path.Combine(cachePath, "MusicConfig.xml");
-
-      Init();
     }
 
     public override bool Init()
@@ -78,21 +79,25 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
       if (!_enabled)
         return false;
 
-      if (_wrapper != null)
-        return true;
-
-      if (!base.Init())
-        return false;
-
-      LoadConfig();
-
-      if (InitWrapper(UseSecureWebCommunication))
+      lock (_initSyncObj)
       {
-        if (_wrapper != null)
-          _wrapper.CacheUpdateFinished += CacheUpdateFinished;
-        return true;
+        if (_isInit)
+          return true;
+
+        if (!base.Init())
+          return false;
+
+        LoadConfig();
+
+        if (InitWrapper(UseSecureWebCommunication))
+        {
+          if (_wrapper != null)
+            _wrapper.CacheUpdateFinished += CacheUpdateFinished;
+          _isInit = true;
+          return true;
+        }
+        return false;
       }
-      return false;
     }
 
     private void LoadConfig()
@@ -1218,6 +1223,10 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
     public List<AlbumInfo> GetLastChangedAudioAlbums()
     {
       List<AlbumInfo> albums = new List<AlbumInfo>();
+
+      if (!Init())
+        return albums;
+
       foreach (string id in _config.LastUpdatedAlbums)
       {
         AlbumInfo a = new AlbumInfo();
@@ -1229,6 +1238,9 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
 
     public void ResetLastChangedAudioAlbums()
     {
+      if (!Init())
+        return;
+
       _config.LastUpdatedAlbums.Clear();
       SaveConfig();
     }
@@ -1236,6 +1248,9 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
     public List<TrackInfo> GetLastChangedAudio()
     {
       List<TrackInfo> tracks = new List<TrackInfo>();
+      if (!Init())
+        return tracks;
+
       foreach (string id in _config.LastUpdatedTracks)
       {
         TrackInfo t = new TrackInfo();
@@ -1247,6 +1262,9 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
 
     public void ResetLastChangedAudio()
     {
+      if (!Init())
+        return;
+
       _config.LastUpdatedTracks.Clear();
       SaveConfig();
     }
@@ -1257,6 +1275,9 @@ namespace MediaPortal.Extensions.OnlineLibraries.Matchers
 
     public virtual bool ScheduleFanArtDownload(Guid mediaItemId, BaseInfo info, bool force)
     {
+      if (!Init())
+        return false;
+
       string id;
       string mediaItem = mediaItemId.ToString().ToUpperInvariant();
       if (info is TrackInfo)
